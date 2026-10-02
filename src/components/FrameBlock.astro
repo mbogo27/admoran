@@ -1,0 +1,38 @@
+---
+// "Same question, different scale" — the lateral link layer. Rendered on
+// every zoom except 1, where ByConcern takes its place (§5.2, §5.5).
+// Source list is frameSiblings (already excludes own parents + children,
+// sorted by zoom distance ascending then title). Filtered here to a
+// *different* zoom level, deduplicated against anything already linked
+// elsewhere on the page, capped at 4.
+import type { GuideNode } from '../lib/graph.ts';
+
+interface Props {
+  node: GuideNode;
+  graph: Map<string, GuideNode>;
+}
+const { node, graph } = Astro.props;
+
+const alreadyLinked = new Set([node.slug, ...node.parents, ...node.children, ...node.related]);
+
+const items = node.frameSiblings
+  .map((s) => graph.get(s))
+  .filter((n): n is GuideNode => Boolean(n))
+  .filter((n) => n.zoom !== node.zoom)
+  .filter((n) => !alreadyLinked.has(n.slug))
+  .slice(0, 4);
+---
+
+{items.length > 0 && (
+  <section class="my-8 border-t border-line pt-6">
+    <h2 class="mb-3 font-heading text-xl font-semibold text-ink">Same question, different scale</h2>
+    <ul class="space-y-3">
+      {items.map((item) => (
+        <li>
+          <a class="font-medium text-ink underline decoration-accent/40 underline-offset-2 hover:decoration-accent" href={`/guides/${item.slug}`}>{item.title}</a>
+          {item.summary && <p class="text-sm text-muted">{item.summary}</p>}
+        </li>
+      ))}
+    </ul>
+  </section>
+)}

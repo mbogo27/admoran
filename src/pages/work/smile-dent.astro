@@ -1,0 +1,87 @@
+---
+// Short project page (spec §8.6) — not a full case study like /work/decl/.
+// Source: the WordPress export's Smile Dent project entry, rewritten to
+// first person and stripped of the unverified "ranking for several local
+// keyword searches" claim per the same evidence discipline as §8.5 — no
+// dated ranking export exists for this client either.
+import Layout from '../../layouts/Layout.astro';
+import CTAButton from '../../components/CTAButton.astro';
+import CTASection from '../../components/CTASection.astro';
+
+const title = 'Smile Dent Center Website — Dental Clinic Redesign | Admoran';
+const description =
+  'A redesign for Smile Dent Center, a dental clinic in Nakuru: simplified structure, an online appointment form, and a responsive rebuild.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Smile Dent Center Website',
+  about: {
+    '@type': 'Service',
+    name: 'Web Design',
+    url: 'https://admoran.com/web-design/',
+  },
+  author: { '@type': 'Person', name: 'Vincent Mbogo' },
+  url: 'https://admoran.com/work/smile-dent/',
+};
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd}>
+  <section class="bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <p class="text-sm font-medium uppercase tracking-wide text-muted">Dental clinic &middot; Redesign + local SEO</p>
+        <h1 class="mt-3 font-heading text-[clamp(2.25rem,4.5vw,3.5rem)] font-semibold leading-[1.1] tracking-tight text-ink">
+          Smile Dent Center — a redesign for a Nakuru dental clinic.
+        </h1>
+        <a
+          href="https://smiledent.co.ke/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-4 inline-block font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
+        >
+          smiledent.co.ke &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose space-y-6 text-[1.0625rem] leading-relaxed text-ink">
+        <p>
+          Smile Dent Center approached me to look at their existing website. It wasn't captivating
+          or intuitive, it wasn't ranking for local searches, and it was making it harder than it
+          needed to be for patients in Nakuru to find the clinic and book an appointment.
+        </p>
+        <p>
+          I redesigned the site around simplicity: a clearer structure, a user-friendly online
+          appointment form, and a responsive rebuild that works properly on the phones most
+          patients were searching from. I also optimised the site for Nakuru-specific local search
+          terms rather than generic dental keywords with no geographic intent.
+        </p>
+        <p class="text-muted">
+          The clinic's own read is that the redesign improved how easy the site is to find and use
+          locally — I don't have a dated ranking export for this client to back that with specific
+          numbers, so I'm not printing a metric here. Same rule as the DECL case study.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CTASection class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 text-center md:py-24">
+      <p class="text-[1.0625rem] text-muted">
+        Want a redesign done the same way?
+        <a href="/web-design/" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">
+          See web design services &rarr;
+        </a>
+      </p>
+      <div class="mt-8">
+        <CTAButton size="lg" message="Hi Vincent, I found the Smile Dent project on admoran.com and I'd like to talk about a redesign.">
+          Talk on WhatsApp
+        </CTAButton>
+      </div>
+    </div>
+  </CTASection>
+</Layout>

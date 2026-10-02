@@ -1,0 +1,151 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import CTAButton from '../components/CTAButton.astro';
+import CTASection from '../components/CTASection.astro';
+import headshot from '../assets/vincent-mbogo.jpeg';
+
+const title = 'About Vincent Mbogo — SEO Consultant & Web Designer in Nairobi | Admoran';
+const description =
+  'Vincent Mbogo founded Admoran in 2018. Nairobi-based, working with Kenyan SMEs on SEO, local search, and web design built on a search-ready foundation.';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'About Vincent Mbogo',
+    url: 'https://admoran.com/about/',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Vincent Mbogo',
+    jobTitle: 'SEO Consultant',
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Admoran',
+    },
+    url: 'https://admoran.com/about/',
+  },
+];
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd}>
+  <!-- Header + photo -->
+  <section class="mx-auto max-w-section bg-paper px-6 py-16 md:py-24">
+    <div class="flex flex-col items-start gap-12 md:flex-row md:items-center">
+      <div class="w-full md:w-[60%]">
+        <h1 class="font-heading text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-[1.05] tracking-tight text-ink">
+          I'm Vincent Mbogo — SEO and web design in Nairobi.
+        </h1>
+        <p class="mt-6 max-w-prose text-[1.0625rem] leading-relaxed text-muted">
+          I founded Admoran in 2018. Since then it's been a focused practice, not an agency — no
+          account managers reading from someone else's playbook, no team you never meet. When you
+          hire me, you get me, on both the site itself and the SEO that gets it found.
+        </p>
+      </div>
+      <div class="w-full shrink-0 md:w-[40%]">
+        <Image
+          src={headshot}
+          alt="Vincent Mbogo, SEO consultant based in Nairobi, Kenya"
+          width={360}
+          height={360}
+          class="mx-auto rounded-2xl object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Where the name comes from -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          Where "Admoran" comes from.
+        </h2>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          It's built on <em>Moran</em> — a word for a driven, disciplined warrior. That's the
+          standard I hold the work to: structure, schema, and entity data coherent enough that a
+          search engine — or, increasingly, an AI model reading the page instead of a person —
+          understands exactly what a business is and what it offers, at a glance.
+        </p>
+        <p class="mt-4 text-[1.0625rem] leading-relaxed text-muted">
+          Google has worked this way for years. Large language models now do too. Treating
+          AI-visibility as a bolt-on tactic misses the point — it's the same structural thinking
+          applied to a newer set of readers, and it's the thinking I build into a site from the
+          first page, not patch in afterwards.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why I do this -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          Why I'm doing this.
+        </h2>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          Too many Kenyan businesses pay for SEO that doesn't work — cookie-cutter reports,
+          meaningless "impressions" metrics, no accountability for whether anything actually moved.
+          The alternative I try to offer is honest: technical, focused, and willing to say "no, this
+          won't work" as often as "yes, let's try it."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- This site + the portfolio -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          This site is also the demonstration.
+        </h2>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          This site loads in under a second, works on any device, and follows every SEO
+          fundamental — clean URLs, proper schema, real content, a sitemap that updates itself.
+          That's the foundation I build for client sites too. Great SEO on a broken site gets you
+          nowhere; a solid foundation plus real SEO work gets results.
+        </p>
+        <p class="mt-4 text-[1.0625rem] leading-relaxed text-muted">
+          <a
+            href="https://pagespeed.web.dev/analysis?url=https://admoran.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
+          >
+            Run this site through PageSpeed Insights yourself
+          </a>
+        </p>
+        <p class="mt-4 text-[1.0625rem] leading-relaxed text-muted">
+          For client work, see <a href="/work/decl/" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">the DECL case study</a>
+          or the full <a href="/work/" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">portfolio</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Web design, plainly -->
+  <section class="mx-auto max-w-section bg-paper px-6 py-16">
+    <div class="max-w-prose rounded-2xl border border-line bg-white px-8 py-6">
+      <h3 class="font-heading text-lg font-semibold text-ink">About the web design side.</h3>
+      <p class="mt-3 text-[1.0625rem] leading-relaxed text-muted">
+        Web design is a full service line, not a favour I do on the side — I build sites in Astro
+        for most clients, WordPress when someone genuinely needs to edit their own content, and
+        the SEO instincts get baked in from the first page rather than retrofitted later.
+        <a href="/web-design/" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">See how I build &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTASection class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 text-center md:py-24">
+      <div class="mt-2">
+        <CTAButton size="lg">Talk on WhatsApp</CTAButton>
+      </div>
+    </div>
+  </CTASection>
+</Layout>

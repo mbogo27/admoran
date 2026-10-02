@@ -1,0 +1,30 @@
+---
+// On-page jump nav for zoom 2 and 3 (v0.2.1 patch 1). Jump links only —
+// no blurbs. Blurbs are what made the children block read as a second
+// TOC in the first place; the two blocks must not converge again.
+// `headings` comes straight from Astro's render(): const { Content, headings } = await render(entry);
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+  minHeadings?: number;
+}
+const { headings, minHeadings = 4 } = Astro.props;
+const items = headings.filter((h) => h.depth === 2);
+const show = items.length >= minHeadings;
+---
+
+{show && (
+  <nav class="toc my-6 rounded border border-line bg-panel p-4" aria-label="On this page">
+    <p class="toc-label mb-2 text-sm font-semibold text-muted">On this page</p>
+    <ol class="space-y-1 text-sm">
+      {items.map((h) => (
+        <li><a class="text-ink underline decoration-accent/40 underline-offset-2 hover:decoration-accent" href={`#${h.slug}`}>{h.text}</a></li>
+      ))}
+    </ol>
+  </nav>
+)}

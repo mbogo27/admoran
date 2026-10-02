@@ -1,0 +1,26 @@
+---
+import Wordmark from './Wordmark.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-line bg-deep">
+  <div class="mx-auto flex max-w-section flex-col items-center gap-4 px-6 py-12 text-center">
+    <span class="inline-block scale-150"><Wordmark class="text-paper" /></span>
+    <p class="mt-2 text-sm text-paper/70">&copy; {year} Admoran. Vincent Mbogo, Nairobi, Kenya.</p>
+    <a
+      href="https://wa.me/254743747496"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-sm font-medium text-paper underline decoration-accent/50 underline-offset-4 hover:decoration-accent"
+    >
+      wa.me/254743747496
+    </a>
+    <nav class="mt-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-paper/70">
+      <a href="/privacy/" class="hover:text-paper">Privacy</a>
+      <a href="/terms/" class="hover:text-paper">Terms</a>
+      <a href="/contact/" class="hover:text-paper">Contact</a>
+    </nav>
+    <p class="mt-2 text-xs text-paper/60">Fast-loading, responsive, with proper URL structure and schema — the foundation I build for clients.</p>
+  </div>
+</footer>

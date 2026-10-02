@@ -1,0 +1,236 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CTAButton from '../../components/CTAButton.astro';
+import CTASection from '../../components/CTASection.astro';
+import FAQItem from '../../components/FAQItem.astro';
+import { gbpIncludes } from '../../data/services';
+import { localSeoFaqs } from '../../data/faqs';
+import { prices } from '../../data/pricing';
+
+const title = 'Local SEO & Google Business Profile Optimization in Kenya | Admoran';
+const description =
+  'Rank in the Google Maps pack for local searches in Kenya. Full GBP optimization from KES 25,000, plus ongoing local SEO as part of the monthly retainer.';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Local SEO & Google Business Profile Optimization',
+    serviceType: 'Local SEO / GBP Optimization',
+    provider: {
+      '@type': 'ProfessionalService',
+      name: 'Admoran',
+      founder: { '@type': 'Person', name: 'Vincent Mbogo' },
+    },
+    areaServed: 'Kenya',
+    url: 'https://admoran.com/seo-services/local-seo/',
+    offers: { '@type': 'Offer', price: String(prices.localSeo.amount), priceCurrency: 'KES' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: localSeoFaqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    })),
+  },
+];
+
+const gbpContext: Record<string, string> = {
+  'Full GBP audit against 40+ ranking factors': 'Finding out exactly what\'s costing you the spot before touching anything.',
+  'Category + service selection (getting this right is 60% of local ranking)': 'The single highest-leverage lever in the whole profile.',
+  'Attribute optimization (accessibility, payment methods, service options)': 'Small details Google uses to match you to the right searches.',
+  'Service area configuration for multi-location or delivery businesses': 'So you show up everywhere you actually serve, not just where you\'re registered.',
+  'Photo strategy — what to add, in what order, tagged correctly': 'Profiles with more photos get more calls and direction requests.',
+  'Review response templates (positive + negative)': 'Consistent, professional responses that protect your reputation either way.',
+  'Q&A seeding with real customer questions': 'Answering what people actually ask before they have to ask you directly.',
+  'Google Posts publishing schedule': 'Keeps your profile active — Google favors profiles that stay maintained.',
+  '30-day monitoring with weekly check-ins': 'Catching drift and ranking movement early, not a month later.',
+};
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd}>
+  <!-- Hero -->
+  <section class="bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h1 class="font-heading text-[clamp(2.25rem,4.5vw,3.5rem)] font-semibold leading-[1.1] tracking-tight text-ink">
+          Local SEO & Google Business Profile optimization for Kenyan businesses.
+        </h1>
+        <p class="mt-6 text-[1.0625rem] leading-relaxed text-muted">
+          Get your business showing up in the Google Maps pack when Nairobi customers search for
+          what you offer. Productized as GBP Rescue, delivered in 5 days plus 30 days of
+          monitoring.
+        </p>
+        <p class="mt-4 font-mono text-sm font-medium text-ink">{prices.localSeo.display} &middot; 5-day delivery</p>
+        <div class="mt-8">
+          <CTAButton
+            size="lg"
+            message="Hi Vincent, I found admoran.com and I'm interested in local SEO / GBP Rescue."
+          >
+            Talk on WhatsApp
+          </CTAButton>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why local SEO matters -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          Why local SEO matters more than "regular" SEO for many Kenyan businesses.
+        </h2>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          The Maps 3-pack captures a huge share of local-intent clicks — often more than the blue
+          links below it. For clinics, salons, workshops, professional services, and restaurants,
+          showing up in that pack is usually worth more than ranking #1 organically. It's the
+          difference between someone finding you when they're already nearby and ready to buy,
+          versus scrolling past you entirely.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What GBP Rescue includes -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+        What GBP Rescue includes.
+      </h2>
+      <ul class="mt-8 max-w-prose space-y-5">
+        {
+          gbpIncludes.map((item) => (
+            <li class="flex gap-3">
+              <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <div>
+                <p class="text-[1.0625rem] leading-relaxed text-ink">{item}</p>
+                {gbpContext[item] && <p class="mt-1 text-sm text-muted">{gbpContext[item]}</p>}
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Beyond GBP -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          Beyond GBP — what "local SEO" actually means.
+        </h2>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          Your Google Business Profile is the fastest-impact starting point, but local SEO is
+          bigger than one profile. It includes local landing pages for multi-location businesses,
+          NAP (name, address, phone) consistency across citations, a deliberate review acquisition
+          strategy, local content that mentions Nairobi neighborhoods and Kenyan context, and
+          LocalBusiness schema markup — especially important once you're managing more than one
+          location.
+        </p>
+        <p class="mt-4 text-[1.0625rem] leading-relaxed text-ink">
+          GBP Rescue is the fastest-impact starting point. Ongoing local SEO work happens as part
+          of the retainer.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+        How the GBP Rescue works.
+      </h2>
+      <div class="mt-8 grid gap-8 max-w-prose">
+        <div>
+          <p class="font-mono text-base font-medium text-ink">Day 1</p>
+          <p class="mt-2 text-[1.0625rem] leading-relaxed text-muted">
+            Full audit against 40+ ranking factors.
+          </p>
+        </div>
+        <div>
+          <p class="font-mono text-base font-medium text-ink">Day 2–3</p>
+          <p class="mt-2 text-[1.0625rem] leading-relaxed text-muted">
+            Category, attribute, service area, and content optimization.
+          </p>
+        </div>
+        <div>
+          <p class="font-mono text-base font-medium text-ink">Day 4</p>
+          <p class="mt-2 text-[1.0625rem] leading-relaxed text-muted">
+            Photos, Q&A seeding, review response templates.
+          </p>
+        </div>
+        <div>
+          <p class="font-mono text-base font-medium text-ink">Day 5</p>
+          <p class="mt-2 text-[1.0625rem] leading-relaxed text-muted">
+            Setup complete, monitoring begins.
+          </p>
+        </div>
+        <div>
+          <p class="font-mono text-base font-medium text-ink">Days 6–35</p>
+          <p class="mt-2 text-[1.0625rem] leading-relaxed text-muted">
+            Weekly check-ins, ranking movement tracking, adjustments.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who this is for -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          Who this is for.
+        </h2>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          Local businesses where physical location or service area matters: clinics, salons,
+          workshops, law firms, real estate, restaurants, gyms, and other professional services
+          competing for customers nearby.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+        Local SEO FAQ.
+      </h2>
+      <div class="mt-8 max-w-prose">
+        {localSeoFaqs.map((faq) => <FAQItem question={faq.question} answer={faq.answer} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross-links + CTA -->
+  <CTASection class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 text-center md:py-24">
+      <p class="text-[1.0625rem] text-muted">
+        Need a full site audit first?
+        <a href="/seo-services/seo-audit/" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">
+          See the SEO audit &rarr;
+        </a>
+      </p>
+      <p class="mt-2 text-[1.0625rem] text-muted">
+        Ready for ongoing growth?
+        <a href="/seo-services/seo-retainer/" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">
+          See the monthly retainer &rarr;
+        </a>
+      </p>
+      <div class="mt-8">
+        <CTAButton
+          size="lg"
+          message="Hi Vincent, I found admoran.com and I'm interested in local SEO / GBP Rescue."
+        >
+          Talk on WhatsApp
+        </CTAButton>
+      </div>
+    </div>
+  </CTASection>
+</Layout>

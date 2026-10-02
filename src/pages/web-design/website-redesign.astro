@@ -1,0 +1,175 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CTAButton from '../../components/CTAButton.astro';
+import CTASection from '../../components/CTASection.astro';
+import FAQItem from '../../components/FAQItem.astro';
+import { prices } from '../../data/pricing';
+import { redesignFaqs } from '../../data/faqs';
+
+const title = 'Website Redesign Services in Nairobi — Fix What Search Can See | Admoran';
+const description =
+  'Website redesign for Kenyan businesses that fixes structural SEO instead of destroying it — URL mapping, content audit, and a migration checklist, from KES 50,000.';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Website Redesign',
+    serviceType: 'Website Redesign',
+    provider: {
+      '@type': 'ProfessionalService',
+      name: 'Admoran',
+      founder: { '@type': 'Person', name: 'Vincent Mbogo' },
+    },
+    areaServed: 'Kenya',
+    url: 'https://admoran.com/web-design/website-redesign/',
+    offers: { '@type': 'Offer', price: String(prices.webDesignFrom.amount), priceCurrency: 'KES' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: redesignFaqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    })),
+  },
+];
+
+const breaks = [
+  {
+    label: 'URL changes without redirects',
+    detail: 'The single most common cause of a redesign tanking traffic. Every ranking page has to map to somewhere.',
+  },
+  {
+    label: 'Lost internal links',
+    detail: 'A new site structure that drops the links between pages that told Google which ones mattered most.',
+  },
+  {
+    label: 'Content cut for visual cleanliness',
+    detail: 'Paragraphs trimmed because they "looked cluttered" — without checking whether that was the paragraph ranking the page.',
+  },
+  {
+    label: 'Schema dropped',
+    detail: 'Structured data that quietly stops getting carried over when a site moves to a new template.',
+  },
+];
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd}>
+  <!-- Hero -->
+  <section class="bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h1 class="font-heading text-[clamp(2.25rem,4.5vw,3.5rem)] font-semibold leading-[1.1] tracking-tight text-ink">
+          Website redesign that fixes what search can see.
+        </h1>
+        <p class="mt-6 text-[1.0625rem] leading-relaxed text-muted">
+          You have a site, and you know it isn't working. A redesign is the cheapest moment to fix
+          structural SEO — and the moment most agencies quietly destroy it.
+        </p>
+        <p class="mt-4 font-mono text-sm font-medium text-ink">
+          {prices.webDesignFrom.display} &middot; typically 2–3 weeks
+        </p>
+        <div class="mt-8">
+          <CTAButton size="lg" message="Hi Vincent, I found admoran.com and I'm interested in a website redesign.">
+            Talk on WhatsApp
+          </CTAButton>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Redesign vs rebuild -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          When a redesign is worth it, and when a rebuild is cheaper.
+        </h2>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          A redesign makes sense when the site's foundation — its content, its rankings, its
+          domain history — is worth keeping and the problem is how that foundation is presented.
+          A rebuild is usually cheaper and faster when the existing site has little organic
+          traffic to protect, or when the underlying structure is broken enough that preserving it
+          costs more than starting clean. If you're not sure which situation you're in, that's
+          exactly what an audit answers before you commit to either.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What breaks -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+        What breaks during a redesign.
+      </h2>
+      <div class="mt-10 grid gap-8 md:grid-cols-2">
+        {
+          breaks.map((item) => (
+            <div class="rounded-2xl border border-line bg-white p-6">
+              <p class="font-semibold text-ink">{item.label}</p>
+              <p class="mt-2 text-[1.0625rem] leading-relaxed text-muted">{item.detail}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Pre-redesign inventory + migration checklist -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="grid gap-10 md:grid-cols-2">
+        <div>
+          <h2 class="font-heading text-xl font-semibold text-ink">The pre-redesign inventory.</h2>
+          <p class="mt-4 text-[1.0625rem] leading-relaxed text-muted">
+            Before a single design decision gets made, I pull a full inventory of the existing
+            site: every indexed URL, current rankings and traffic by page, the internal link
+            structure, and existing schema. That inventory is what the new site gets measured
+            against — nothing structural moves without a reason.
+          </p>
+        </div>
+        <div>
+          <h2 class="font-heading text-xl font-semibold text-ink">The migration checklist.</h2>
+          <p class="mt-4 text-[1.0625rem] leading-relaxed text-muted">
+            Every old URL mapped to its new equivalent with a 301 redirect. Every internal link
+            re-pointed, not left dangling. Every schema block carried over or upgraded. Search
+            Console and Analytics reconnected and verified before the old site comes down, not
+            after.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+        Redesign FAQ.
+      </h2>
+      <div class="mt-8 max-w-prose">
+        {redesignFaqs.map((faq) => <FAQItem question={faq.question} answer={faq.answer} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross-links + CTA -->
+  <CTASection class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 text-center md:py-24">
+      <p class="text-[1.0625rem] text-muted">
+        Not sure if a redesign is actually the problem?
+        <a href="/seo-services/seo-audit/" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">
+          Start with an SEO audit &rarr;
+        </a>
+      </p>
+      <div class="mt-8">
+        <CTAButton size="lg" message="Hi Vincent, I found admoran.com and I'm interested in a website redesign.">
+          Talk on WhatsApp
+        </CTAButton>
+      </div>
+    </div>
+  </CTASection>
+</Layout>

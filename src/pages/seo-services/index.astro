@@ -1,0 +1,110 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CTAButton from '../../components/CTAButton.astro';
+import CTASection from '../../components/CTASection.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import FAQItem from '../../components/FAQItem.astro';
+import { offers } from '../../data/services';
+import { servicesFaqs } from '../../data/faqs';
+
+const title = 'SEO Services and Pricing in Kenya — Admoran';
+const description =
+  'Three ways to work with me: fixed-price SEO audit, Google Business Profile rescue, or monthly retainer. Honest pricing for Kenyan SMEs.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'SEO Services and Pricing',
+  url: 'https://admoran.com/seo-services/',
+};
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd}>
+  <!-- Header -->
+  <section class="mx-auto max-w-section px-6 py-16 md:py-24">
+    <div class="max-w-prose">
+      <h1 class="font-heading text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-[1.05] tracking-tight text-ink">
+        SEO services and pricing.
+      </h1>
+      <p class="mt-6 text-[1.0625rem] leading-relaxed text-muted">
+        Fixed-price one-offs for people who want to see results before committing. Monthly
+        retainers for ongoing growth. All prices are in KES, no hidden fees, no "starting from"
+        games.
+      </p>
+    </div>
+  </section>
+
+  <!-- Three service cards -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="grid gap-6 md:grid-cols-3">
+        {
+          offers.map((offer) => (
+            <ServiceCard
+              name={offer.name}
+              price={offer.price}
+              timeframe={offer.timeframe}
+              description={offer.description}
+              href={offer.href}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Which one is right for me -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          Which one is right for me?
+        </h2>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          Not sure your site is performing the way it should, but don't know why? Start with the
+          <a href="/seo-services/seo-audit/" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">SEO audit</a> —
+          it tells you exactly what's wrong before you spend another shilling. Local business that
+          needs to show up when someone searches nearby? Go straight to
+          <a href="/seo-services/local-seo/" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">local SEO & GBP</a>,
+          the fastest-impact starting point for Maps visibility. Already know SEO is worth
+          investing in and want ongoing growth, not a one-off fix? That's the
+          <a href="/seo-services/seo-retainer/" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">monthly retainer</a>.
+          Still unsure — ask on WhatsApp with your site URL and I'll point you at the right one
+          honestly, even if that means telling you to hold off.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+        Services FAQ.
+      </h2>
+      <div class="mt-8 max-w-prose">
+        {servicesFaqs.map((faq) => <FAQItem question={faq.question} answer={faq.answer} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <CTASection class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 text-center md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+        Ready to get started?
+      </h2>
+      <p class="mx-auto mt-4 max-w-prose text-[1.0625rem] text-muted">
+        Tell me which offer fits and I'll walk you through the next step.
+      </p>
+      <div class="mt-8">
+        <CTAButton
+          size="lg"
+          message="Hi Vincent, found admoran.com and I'm looking at the SEO audit / local SEO / retainer."
+        >
+          Talk on WhatsApp
+        </CTAButton>
+      </div>
+    </div>
+  </CTASection>
+</Layout>

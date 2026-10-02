@@ -1,0 +1,254 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CTAButton from '../../components/CTAButton.astro';
+import CTASection from '../../components/CTASection.astro';
+import FAQItem from '../../components/FAQItem.astro';
+import { retainerTiers } from '../../data/services';
+import { retainerFaqs } from '../../data/faqs';
+
+const title = 'SEO Services in Kenya — Monthly Retainer Packages from KES 45,000 | Admoran';
+const description =
+  'Monthly SEO services for Kenyan businesses. Starter at KES 45k/month, Growth at KES 75k/month. Six-month minimum, honest pricing, includes technical SEO, content, and AI visibility.';
+
+const jsonLd = [
+  ...retainerTiers.map((tier) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `SEO Retainer — ${tier.name}`,
+    serviceType: 'Monthly SEO Retainer',
+    provider: {
+      '@type': 'ProfessionalService',
+      name: 'Admoran',
+      founder: { '@type': 'Person', name: 'Vincent Mbogo' },
+    },
+    areaServed: 'Kenya',
+    url: 'https://admoran.com/seo-services/seo-retainer/',
+    offers: { '@type': 'Offer', price: String(tier.priceValue), priceCurrency: 'KES' },
+  })),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: retainerFaqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    })),
+  },
+];
+
+const exclusions = [
+  'No social media management — I focus on organic search',
+  'No black-hat tactics, link farms, or PBNs',
+  'No "guaranteed #1 rankings" — anyone promising this is lying, and Google’s TOS prohibits it',
+  'No lock-in beyond the 6-month retainer minimum',
+];
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd}>
+  <!-- Hero -->
+  <section class="bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h1 class="font-heading text-[clamp(2.25rem,4.5vw,3.5rem)] font-semibold leading-[1.1] tracking-tight text-ink">
+          Monthly SEO services in Kenya — from KES 45,000/month.
+        </h1>
+        <p class="mt-6 text-[1.0625rem] leading-relaxed text-muted">
+          Ongoing SEO for Kenyan businesses serious about growing organic traffic and rankings.
+          Six-month minimum, two tiers, honest pricing.
+        </p>
+        <div class="mt-8">
+          <CTAButton
+            size="lg"
+            message="Hi Vincent, I found admoran.com and I'm interested in the monthly retainer."
+          >
+            Talk on WhatsApp
+          </CTAButton>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What ongoing SEO looks like -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          What ongoing SEO actually looks like.
+        </h2>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          Not a set of tricks or a one-time setup. It's a continuous discipline: technical health,
+          on-page depth, content, links, AI visibility, Google Business Profile maintenance,
+          competitor tracking, and honest reporting on what moved and why. If you've been burned
+          by SEO before — vague reports, no visible results, no idea what you were actually paying
+          for — that's exactly what this is built to fix.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Two tiers -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+        Two tiers, side by side.
+      </h2>
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        {
+          retainerTiers.map((tier) => (
+            <div class="rounded-2xl border border-line bg-white p-8">
+              <h3 class="font-heading text-xl font-semibold text-ink">{tier.name}</h3>
+              <p class="mt-2 font-mono text-lg font-medium text-ink">{tier.price}</p>
+              <p class="mt-1 text-sm text-muted">{tier.minimum}</p>
+              <ul class="mt-6 space-y-3">
+                {tier.features.map((feature) => (
+                  <li class="flex gap-3 text-[1.0625rem] leading-relaxed text-muted">
+                    <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <p class="mt-6 text-sm font-medium text-ink">{tier.fits}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="mx-auto mt-10 max-w-prose text-[1.0625rem] leading-relaxed text-muted">
+        <strong class="text-ink">How to pick between them:</strong> most clients start on Starter
+        while the technical and on-page foundation gets fixed, then move to Growth once content
+        and link velocity become the priority. If you're not sure, start with the audit — it'll
+        tell you which tier of ongoing work your site actually needs.
+      </p>
+    </div>
+  </section>
+
+  <!-- What's included across both -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+        What's included across both tiers.
+      </h2>
+      <ul class="mt-8 max-w-prose space-y-4">
+        <li class="text-[1.0625rem] leading-relaxed text-muted">
+          <strong class="text-ink">Technical SEO monitoring</strong> — ongoing Core Web Vitals,
+          crawl health, indexation, and schema maintenance.
+        </li>
+        <li class="text-[1.0625rem] leading-relaxed text-muted">
+          <strong class="text-ink">On-page SEO</strong> — title, meta, and heading optimization,
+          internal linking, and content depth improvements.
+        </li>
+        <li class="text-[1.0625rem] leading-relaxed text-muted">
+          <strong class="text-ink">Content</strong> — written or edited by me directly, not
+          outsourced to a content mill.
+        </li>
+        <li class="text-[1.0625rem] leading-relaxed text-muted">
+          <strong class="text-ink">Link acquisition</strong> — quality mentions, not spam or link
+          farms.
+        </li>
+        <li class="text-[1.0625rem] leading-relaxed text-muted">
+          <strong class="text-ink">AI visibility optimization</strong> — entity-level schema,
+          structured data for LLMs, and prompt-visibility testing (Growth tier).
+        </li>
+        <li class="text-[1.0625rem] leading-relaxed text-muted">
+          <strong class="text-ink">Local SEO / GBP maintenance</strong> — keeping your Google
+          Business Profile active and accurate month over month.
+        </li>
+        <li class="text-[1.0625rem] leading-relaxed text-muted">
+          <strong class="text-ink">Monthly reporting</strong> — clear on what moved, why, and
+          what's next, no vanity metrics.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Discounts and terms -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          Discounts and terms.
+        </h2>
+        <ul class="mt-6 space-y-3">
+          <li class="flex gap-3 text-[1.0625rem] leading-relaxed text-muted">
+            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+            10% discount on 12-month prepay
+          </li>
+          <li class="flex gap-3 text-[1.0625rem] leading-relaxed text-muted">
+            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+            30-day out clause available in the first month only (fair trial)
+          </li>
+          <li class="flex gap-3 text-[1.0625rem] leading-relaxed text-muted">
+            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+            After 6 months, month-to-month rolling
+          </li>
+          <li class="flex gap-3 text-[1.0625rem] leading-relaxed text-muted">
+            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+            No surprise fees, no "additional scope" traps
+          </li>
+          <li class="flex gap-3 text-[1.0625rem] leading-relaxed text-muted">
+            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+            Formal invoices with tax details
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- What I don't offer -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          What I don't offer.
+        </h2>
+        <ul class="mt-6 space-y-3">
+          {
+            exclusions.map((item) => (
+              <li class="flex gap-3 text-[1.0625rem] leading-relaxed text-muted">
+                <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+        Retainer FAQ.
+      </h2>
+      <div class="mt-8 max-w-prose">
+        {retainerFaqs.map((faq) => <FAQItem question={faq.question} answer={faq.answer} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross-links + CTA -->
+  <CTASection class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 text-center md:py-24">
+      <p class="text-[1.0625rem] text-muted">
+        Not sure where to start?
+        <a href="/seo-services/seo-audit/" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">
+          A one-time audit tells you what you actually need &rarr;
+        </a>
+      </p>
+      <p class="mt-2 text-[1.0625rem] text-muted">
+        Local business focused on Maps?
+        <a href="/seo-services/local-seo/" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">
+          See local SEO &rarr;
+        </a>
+      </p>
+      <div class="mt-8">
+        <CTAButton
+          size="lg"
+          message="Hi Vincent, I found admoran.com and I'm interested in the monthly retainer."
+        >
+          Talk on WhatsApp
+        </CTAButton>
+      </div>
+    </div>
+  </CTASection>
+</Layout>

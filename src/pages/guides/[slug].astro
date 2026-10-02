@@ -1,0 +1,26 @@
+---
+import { getCollection, render } from 'astro:content';
+import Guide from '../../layouts/Guide.astro';
+import { buildGraph } from '../../lib/graph.ts';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('guides');
+  return entries.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const graph = buildGraph();
+const node = graph.get(entry.data.slug);
+
+if (!node) {
+  throw new Error(`No graph node found for slug "${entry.data.slug}" — graph.ts and the content collection have drifted apart.`);
+}
+---
+
+<Guide node={node} graph={graph} headings={headings} renderedHtml={entry.rendered?.html ?? ''}>
+  <Content />
+</Guide>

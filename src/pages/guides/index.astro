@@ -1,0 +1,96 @@
+---
+// Spec §8.9 — the map's front door, not a blog roll. Build B had no
+// /guides/ index (its index.astro redirected straight to the pillar); with
+// /blog/ and /resources-2/ both 301ing here, this URL has to resolve to
+// something real. Reuses ChildrenBlock and ByConcern rather than new
+// components, per the spec's explicit instruction.
+import Layout from '../../layouts/Layout.astro';
+import ChildrenBlock from '../../components/ChildrenBlock.astro';
+import ByConcern from '../../components/ByConcern.astro';
+import { buildGraph } from '../../lib/graph.ts';
+
+const graph = buildGraph();
+const pillar = graph.get('seo-in-kenya');
+
+if (!pillar) {
+  throw new Error('Guides index: pillar node "seo-in-kenya" not found in graph.');
+}
+
+const categories = pillar.children
+  .map((slug) => graph.get(slug))
+  .filter((n): n is NonNullable<typeof n> => n !== undefined)
+  .filter((n) => n.zoom === 2);
+
+const title = 'SEO Guides for Kenyan Businesses | Admoran';
+const description =
+  'Plain-language SEO guides for Kenyan businesses — technical SEO, local SEO, hiring an SEO, AI search visibility, and more, organised by concern rather than by chapter.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'SEO Guides',
+  url: 'https://admoran.com/guides/',
+};
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd}>
+  <!-- Header -->
+  <section class="bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h1 class="font-heading text-[clamp(2.25rem,4.5vw,3.5rem)] font-semibold leading-[1.1] tracking-tight text-ink">
+          Guides.
+        </h1>
+        <p class="mt-6 text-[1.0625rem] leading-relaxed text-muted">
+          Plain-language SEO guidance for Kenyan businesses, organised by concern rather than by
+          publish date. Start with the pillar guide, or jump straight to what you're trying to
+          figure out.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The pillar -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose rounded-2xl border border-line bg-panel p-8">
+        <p class="text-sm font-medium uppercase tracking-wide text-muted">Start here</p>
+        <h2 class="mt-2 font-heading text-2xl font-semibold text-ink">
+          <a href={`/guides/${pillar.slug}/`} class="hover:underline">{pillar.title}</a>
+        </h2>
+        {pillar.summary && <p class="mt-3 text-[1.0625rem] leading-relaxed text-muted">{pillar.summary}</p>}
+        <a
+          href={`/guides/${pillar.slug}/`}
+          class="mt-4 inline-block font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
+        >
+          Read the pillar guide &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories, with their children grouped beneath -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">Browse by category.</h2>
+      <div class="mt-10 grid gap-10 md:grid-cols-2">
+        {categories.map((category) => (
+          <div class="rounded-2xl border border-line bg-white p-6">
+            <h3 class="font-heading text-xl font-semibold text-ink">
+              <a href={`/guides/${category.slug}/`} class="hover:underline">{category.title}</a>
+            </h3>
+            {category.summary && <p class="mt-2 text-sm text-muted">{category.summary}</p>}
+            <ChildrenBlock title="In this category" slugs={category.children} graph={graph} groupByZoom={false} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- By concern -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <ByConcern node={pillar} graph={graph} />
+    </div>
+  </section>
+</Layout>

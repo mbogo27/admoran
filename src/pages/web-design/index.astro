@@ -1,0 +1,309 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import CTAButton from '../../components/CTAButton.astro';
+import CTASection from '../../components/CTASection.astro';
+import FAQItem from '../../components/FAQItem.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import heroImage from '../../assets/web-design-hero.jpg';
+import { projects } from '../../data/projects';
+import { prices } from '../../data/pricing';
+import { webDesignFaqs } from '../../data/faqs';
+
+const title = 'Web Design in Kenya, Built on an SEO Foundation | Admoran';
+const description =
+  'Web design in Kenya from Vincent Mbogo, from KES 50,000. Structure, speed, and schema decided at build time — not retrofitted after launch.';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Web Design',
+    serviceType: 'Web Design',
+    provider: {
+      '@type': 'ProfessionalService',
+      name: 'Admoran',
+      founder: { '@type': 'Person', name: 'Vincent Mbogo' },
+    },
+    areaServed: 'Kenya',
+    url: 'https://admoran.com/web-design/',
+    offers: { '@type': 'Offer', price: String(prices.webDesignFrom.amount), priceCurrency: 'KES' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: webDesignFaqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    })),
+  },
+];
+
+const deliverables = [
+  {
+    label: 'A properly structured, responsive site',
+    context: 'Built to a page count that fits what your business actually needs to say — not a fixed template with gaps padded out.',
+  },
+  {
+    label: 'Hosting setup and SSL',
+    context: 'Configured and handed to you, or managed by me ongoing — your call, covered on the pricing page.',
+  },
+  {
+    label: 'Google Business Profile connection',
+    context: 'Your site and your GBP reinforce each other instead of operating as two disconnected assets.',
+  },
+  {
+    label: 'Analytics and Search Console, configured',
+    context: 'Wired up before launch, not added as an afterthought once you ask "how do I know if this is working?"',
+  },
+  {
+    label: 'Schema markup',
+    context: 'The structured data that tells Google — and increasingly AI models — exactly what your business is and does.',
+  },
+  {
+    label: 'A sitemap that updates itself',
+    context: 'New pages get discovered without you having to remember to tell anyone.',
+  },
+  {
+    label: 'A real page speed target, not a guess',
+    context: 'Measured against PageSpeed Insights, not "it feels fast on my laptop."',
+  },
+];
+
+const featured = projects.filter((p) => p.featured);
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd}>
+  <!-- Hero -->
+  <section class="bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="flex flex-col items-start gap-12 md:flex-row md:items-center">
+        <div class="w-full md:w-[60%]">
+          <h1 class="font-heading text-[clamp(2.25rem,4.5vw,3.5rem)] font-semibold leading-[1.1] tracking-tight text-ink">
+            Web design in Kenya, built on an SEO foundation.
+          </h1>
+          <p class="mt-6 max-w-prose text-[1.0625rem] leading-relaxed text-muted">
+            Most Kenyan websites are built by designers who hand over something that looks fine
+            and cannot be found. I build the two together, because they were never actually two
+            separate jobs.
+          </p>
+          <p class="mt-4 font-mono text-sm font-medium text-ink">
+            {prices.webDesignFrom.display} &middot; typically 2–3 weeks
+          </p>
+          <div class="mt-8">
+            <CTAButton
+              size="lg"
+              message="Hi Vincent, I found admoran.com and I'm interested in a website build."
+            >
+              Talk on WhatsApp
+            </CTAButton>
+          </div>
+        </div>
+        <div class="w-full shrink-0 md:w-[40%]">
+          <Image src={heroImage} alt="Responsive website design across desktop, tablet, and mobile" width={640} height={480} class="mx-auto rounded-2xl object-cover" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sub-services -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="grid gap-6 md:grid-cols-2">
+        <ServiceCard
+          name="Website Redesign"
+          price={prices.webDesignFrom.display}
+          timeframe="2–3 weeks"
+          description="Fixes what search can see — without losing the rankings and content the old site already earned."
+          href="/web-design/website-redesign/"
+        />
+        <ServiceCard
+          name="Ecommerce Web Design"
+          price={prices.ecommerceFrom.display}
+          timeframe="4+ weeks"
+          description="A real storefront — payment integration, product structure, and M-Pesa — not a brochure site with a cart bolted on."
+          href="/web-design/ecommerce/"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- The argument -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          A website that ranks and a website that looks good are not the same project.
+        </h2>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          Most buyers get the second one. It photographs well in a portfolio and falls apart the
+          moment you check whether Google can actually find it — no clean URL structure, no
+          schema, a page speed score that quietly caps every ranking effort you put on top of it
+          later.
+        </p>
+        <p class="mt-4 text-[1.0625rem] leading-relaxed text-muted">
+          Structure, speed, schema, and URL design get decided at build time. They're cheap to get
+          right on day one and expensive to retrofit once a site is live, indexed, and has real
+          traffic depending on URLs that shouldn't change. When they weren't decided properly the
+          first time, a
+          <a href="/web-design/website-redesign/" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">redesign</a>
+          is usually the fix — and the same structural work has to happen eventually either way.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What you get -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">What you get.</h2>
+      <ul class="mt-8 max-w-prose space-y-5">
+        {
+          deliverables.map((item) => (
+            <li class="flex gap-3">
+              <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <div>
+                <p class="text-[1.0625rem] leading-relaxed text-ink">{item.label}</p>
+                <p class="mt-1 text-sm text-muted">{item.context}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- How I build -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">How I build.</h2>
+      <div class="mt-8 grid gap-8 max-w-prose">
+        <div>
+          <p class="font-mono text-base font-medium text-ink">Days 1–2</p>
+          <p class="mt-2 text-[1.0625rem] leading-relaxed text-muted">
+            Content and structure planning — pages, navigation, URL map, keyword targets per page.
+          </p>
+        </div>
+        <div>
+          <p class="font-mono text-base font-medium text-ink">Days 3–8</p>
+          <p class="mt-2 text-[1.0625rem] leading-relaxed text-muted">
+            Design and build — responsive layout, content entry, schema, on-page SEO fundamentals.
+          </p>
+        </div>
+        <div>
+          <p class="font-mono text-base font-medium text-ink">Days 9–11</p>
+          <p class="mt-2 text-[1.0625rem] leading-relaxed text-muted">
+            Technical setup — hosting, SSL, Analytics, Search Console, GBP connection, speed
+            testing.
+          </p>
+        </div>
+        <div>
+          <p class="font-mono text-base font-medium text-ink">Days 12–14</p>
+          <p class="mt-2 text-[1.0625rem] leading-relaxed text-muted">
+            Review, revisions, and launch.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stack, honestly -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          Stack, honestly.
+        </h2>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          I build most sites in Astro — the framework this site itself runs on. It's fast by
+          default and produces the kind of clean, crawlable markup search engines and AI models
+          read easily. The tradeoff: editing content beyond simple text swaps needs a developer.
+        </p>
+        <p class="mt-4 text-[1.0625rem] leading-relaxed text-muted">
+          When a client genuinely needs to edit their own content regularly — new products, a
+          steady stream of posts, a team that isn't going to call me for every change — I build in
+          WordPress instead. It's heavier and slower out of the box, but that's the honest
+          tradeoff for real editorial control, and I still apply the same SEO fundamentals on top
+          of it. Neither stack is inherently "better" — it depends on who's going to touch the
+          site after launch.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent work -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">Recent work.</h2>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {featured.map((project) => <ProjectCard project={project} />)}
+      </div>
+      <a href="/work/" class="mt-8 inline-block font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">
+        See the full portfolio &rarr;
+      </a>
+    </div>
+  </section>
+
+  <!-- Price -->
+  <section class="border-t border-line bg-tint">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">Price.</h2>
+        <p class="mt-2 font-mono text-lg font-medium text-ink">{prices.webDesignFrom.display}</p>
+        <p class="mt-4 text-[1.0625rem] leading-relaxed text-muted">
+          What moves the number: page count beyond the standard set, custom functionality (booking
+          forms, multi-location structure, member areas), and content that needs to be written
+          rather than supplied. Out of scope at this tier: logo and brand identity design,
+          professional photography, and ongoing content writing after launch — all available
+          separately, on request.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+        Web design FAQ.
+      </h2>
+      <div class="mt-8 max-w-prose">
+        {webDesignFaqs.map((faq) => <FAQItem question={faq.question} answer={faq.answer} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross-links + CTA -->
+  <CTASection class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 text-center md:py-24">
+      <p class="text-[1.0625rem] text-muted">
+        Already have a site that needs fixing, not replacing?
+        <a href="/web-design/website-redesign/" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">
+          See website redesign &rarr;
+        </a>
+      </p>
+      <p class="mt-2 text-[1.0625rem] text-muted">
+        Selling products online?
+        <a href="/web-design/ecommerce/" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">
+          See ecommerce web design &rarr;
+        </a>
+      </p>
+      <p class="mt-2 text-[1.0625rem] text-muted">
+        Not sure if a rebuild is even the problem?
+        <a href="/seo-services/seo-audit/" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">
+          Start with an SEO audit &rarr;
+        </a>
+      </p>
+      <div class="mt-8">
+        <CTAButton
+          size="lg"
+          message="Hi Vincent, I found admoran.com and I'm interested in a website build."
+        >
+          Talk on WhatsApp
+        </CTAButton>
+      </div>
+    </div>
+  </CTASection>
+</Layout>

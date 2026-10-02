@@ -1,0 +1,27 @@
+---
+// Shared background-image treatment for the closing CTA section that sits
+// above the footer on every page. Content is passed via slot so each page
+// keeps its own heading/copy/links.
+import { Image } from 'astro:assets';
+import heroBg from '../assets/hero-bg.jpg';
+
+export interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<section class={`relative overflow-hidden ${className}`}>
+  <Image
+    src={heroBg}
+    alt=""
+    role="presentation"
+    width={1600}
+    height={900}
+    loading="lazy"
+    class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-40"
+  />
+  <div class="relative">
+    <slot />
+  </div>
+</section>

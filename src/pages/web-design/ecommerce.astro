@@ -1,0 +1,184 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CTAButton from '../../components/CTAButton.astro';
+import CTASection from '../../components/CTASection.astro';
+import FAQItem from '../../components/FAQItem.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { prices } from '../../data/pricing';
+import { ecommerceFaqs } from '../../data/faqs';
+import { projects } from '../../data/projects';
+
+const title = 'Ecommerce Website Design in Kenya — From KES 150,000 | Admoran';
+const description =
+  'Ecommerce website design for Kenyan businesses, from KES 150,000. Real storefronts with M-Pesa integration and proper product structure, not a brochure site with a cart bolted on.';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Ecommerce Website Design',
+    serviceType: 'Ecommerce Website Design',
+    provider: {
+      '@type': 'ProfessionalService',
+      name: 'Admoran',
+      founder: { '@type': 'Person', name: 'Vincent Mbogo' },
+    },
+    areaServed: 'Kenya',
+    url: 'https://admoran.com/web-design/ecommerce/',
+    offers: { '@type': 'Offer', price: String(prices.ecommerceFrom.amount), priceCurrency: 'KES' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: ecommerceFaqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    })),
+  },
+];
+
+const ecommerceProjects = projects.filter((p) => p.services.includes('ecommerce'));
+
+const notIncluded = [
+  'Product photography',
+  'Product copywriting',
+  'Initial catalogue entry',
+  'Ongoing stock management',
+];
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd}>
+  <!-- Hero -->
+  <section class="bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h1 class="font-heading text-[clamp(2.25rem,4.5vw,3.5rem)] font-semibold leading-[1.1] tracking-tight text-ink">
+          Ecommerce website design in Kenya.
+        </h1>
+        <p class="mt-6 font-mono text-lg font-medium text-ink">
+          {prices.ecommerceFrom.display}
+        </p>
+        <p class="mt-4 text-[1.0625rem] leading-relaxed text-muted">
+          A real storefront — payment integration, product structure, and ongoing catalogue work
+          accounted for honestly, not a brochure site with a cart plugin bolted on.
+        </p>
+        <div class="mt-8">
+          <CTAButton size="lg" message="Hi Vincent, I found admoran.com and I'm interested in an ecommerce site.">
+            Talk on WhatsApp
+          </CTAButton>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What an ecommerce build actually involves -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          What an ecommerce build actually involves.
+        </h2>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          A brochure site describes your business. An ecommerce site has to run it: product
+          catalogues that stay accurate, checkout that actually charges people correctly, stock
+          that doesn't oversell, and payment integration — including M-Pesa, the genuine local
+          expectation, alongside card payments. Each of those is a real system, not a page
+          template, and each has to keep working after launch, not just on launch day.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ongoing work -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          Product data is ongoing work, not a one-off.
+        </h2>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          Catalogue and stock management don't stop when the site launches — new products, price
+          changes, out-of-stock updates. That's real, continuous work, and it's yours to run day
+          to day unless we agree otherwise. I build the system so it's straightforward to manage
+          yourself.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform options -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          Platform options, honestly.
+        </h2>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          Shopify is faster to launch and easier to maintain, at the cost of an ongoing platform
+          fee regardless of sales volume. WooCommerce (on WordPress) has no platform fee and more
+          flexibility, at the cost of more moving parts to keep updated and secure. Neither is
+          universally right — it depends on your catalogue size, technical comfort, and how much
+          customization you actually need. I'll walk through the tradeoff for your specific case
+          rather than defaulting to one.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's not included -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+        What's not included.
+      </h2>
+      <ul class="mt-8 max-w-prose space-y-3">
+        {
+          notIncluded.map((item) => (
+            <li class="flex gap-3 text-[1.0625rem] leading-relaxed text-muted">
+              <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-6 max-w-prose text-[1.0625rem] leading-relaxed text-muted">
+        All available separately, on request — but stated upfront rather than discovered halfway
+        through the project.
+      </p>
+    </div>
+  </section>
+
+  {ecommerceProjects.length > 0 && (
+    <!-- Recent ecommerce work -->
+    <section class="border-t border-line bg-white">
+      <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">Recent ecommerce work.</h2>
+        <div class="mt-8 grid gap-6 md:grid-cols-3">
+          {ecommerceProjects.map((project) => <ProjectCard project={project} />)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- FAQ -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+        Ecommerce FAQ.
+      </h2>
+      <div class="mt-8 max-w-prose">
+        {ecommerceFaqs.map((faq) => <FAQItem question={faq.question} answer={faq.answer} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTASection class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 text-center md:py-24">
+      <CTAButton size="lg" message="Hi Vincent, I found admoran.com and I'm interested in an ecommerce site.">
+        Talk on WhatsApp
+      </CTAButton>
+    </div>
+  </CTASection>
+</Layout>

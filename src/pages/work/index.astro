@@ -1,0 +1,63 @@
+---
+// Spec §8.4 calls for a CSS-only industry filter. With 3 confirmed
+// projects (see src/data/projects.ts) spread across 3 different
+// industries, a filter would show exactly one result per option — added
+// UI with no real value yet. Revisit once more of the 19 are confirmed.
+import Layout from '../../layouts/Layout.astro';
+import CTAButton from '../../components/CTAButton.astro';
+import CTASection from '../../components/CTASection.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects } from '../../data/projects';
+
+const title = 'Web Design Portfolio — Sites Built in Kenya | Admoran';
+const description =
+  'Web design and SEO portfolio from Vincent Mbogo — real client sites built in Kenya, including an environmental consultancy, a dental clinic, and a fashion ecommerce store.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Web design portfolio',
+  url: 'https://admoran.com/work/',
+};
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd}>
+  <!-- Header -->
+  <section class="bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h1 class="font-heading text-[clamp(2.25rem,4.5vw,3.5rem)] font-semibold leading-[1.1] tracking-tight text-ink">
+          Web design portfolio.
+        </h1>
+        <p class="mt-6 text-[1.0625rem] leading-relaxed text-muted">
+          A working sample of sites built and worked on since 2018. This list is a fraction of the
+          real total — most of the archive predates this rebuild and is being verified project by
+          project rather than listed from memory.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grid -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="grid gap-6 md:grid-cols-3">
+        {projects.map((project) => <ProjectCard project={project} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTASection class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 text-center md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+        Want to be next?
+      </h2>
+      <div class="mt-8">
+        <CTAButton size="lg" message="Hi Vincent, I found admoran.com and I'd like to talk about a website build.">
+          Talk on WhatsApp
+        </CTAButton>
+      </div>
+    </div>
+  </CTASection>
+</Layout>

@@ -1,0 +1,42 @@
+---
+// The one exception to v0.2 §4.3's mid-body rule (CO-02 §6): this is
+// authored content illustrating the section it sits in, not an injected
+// navigation block. The chunk rule stops a claim being separated from
+// its evidence; a diagram of the claim is evidence, not a separator.
+// Placed inside "The three layers" section, immediately after its H2.
+// currentColor throughout, so it inherits the surrounding text colour
+// and needs no second asset for dark mode.
+---
+<figure class="three-layers my-6">
+  <svg viewBox="0 0 400 260" role="img" aria-labelledby="tl-title tl-desc"
+       class="mx-auto w-full max-w-md text-ink"
+       xmlns="http://www.w3.org/2000/svg">
+    <title id="tl-title">The three layers of search visibility work</title>
+    <desc id="tl-desc">
+      A stack of three layers. Technical forms the base and gates everything above it.
+      Local sits in the middle. Content sits at the top.
+    </desc>
+
+    <g stroke="currentColor" stroke-width="1.5" fill="none">
+      <rect x="20"  y="180" width="360" height="60" />
+      <rect x="70"  y="110" width="260" height="60" />
+      <rect x="120" y="40"  width="160" height="60" />
+    </g>
+
+    <g fill="currentColor" font-size="15" font-weight="600" text-anchor="middle">
+      <text x="200" y="205">Technical</text>
+      <text x="200" y="135">Local</text>
+      <text x="200" y="65">Content</text>
+    </g>
+
+    <g fill="currentColor" font-size="11.5" opacity="0.75" text-anchor="middle">
+      <text x="200" y="224">Can Google crawl, render and index the site?</text>
+      <text x="200" y="154">Do you appear in Maps and local results?</text>
+      <text x="200" y="84">Do the pages answer the question?</text>
+    </g>
+  </svg>
+  <figcaption class="mt-2 text-center text-sm text-muted">
+    Technical is the gate. Work on the layers above it only registers once the layer
+    below is sound.
+  </figcaption>
+</figure>

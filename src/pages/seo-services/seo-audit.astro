@@ -1,0 +1,246 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CTAButton from '../../components/CTAButton.astro';
+import CTASection from '../../components/CTASection.astro';
+import FAQItem from '../../components/FAQItem.astro';
+import { auditIncludes } from '../../data/services';
+import { auditFaqs } from '../../data/faqs';
+import { prices } from '../../data/pricing';
+
+const title = `SEO Audit Services in Kenya — ${prices.seoAudit.display.replace(' flat', '')} Fixed Price | Admoran`;
+const description =
+  'Full SEO audit for Kenyan businesses. Technical, on-page, GSC analysis, competitor mapping, and GBP review. Delivered in 5–7 days as a prioritized fix list.';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'SEO Audit',
+    serviceType: 'SEO Audit',
+    provider: {
+      '@type': 'ProfessionalService',
+      name: 'Admoran',
+      founder: { '@type': 'Person', name: 'Vincent Mbogo' },
+    },
+    areaServed: 'Kenya',
+    url: 'https://admoran.com/seo-services/seo-audit/',
+    offers: { '@type': 'Offer', price: String(prices.seoAudit.amount), priceCurrency: 'KES' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: auditFaqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    })),
+  },
+];
+
+const includesContext: Record<string, string> = {
+  'Full technical crawl (site speed, Core Web Vitals, crawl errors, indexation, mobile usability)':
+    'The stuff that quietly caps your rankings no matter how good your content is.',
+  'On-page SEO review of top 20 pages (titles, meta, headings, internal links, content depth)':
+    'Where most sites leave easy wins on the table.',
+  'Google Search Console analysis (impressions, clicks, position trends, opportunity queries)':
+    'What Google already knows about your site that you probably haven’t looked at.',
+  'Competitor mapping (3 direct competitors — where they beat you, where you can beat them)':
+    'So you know exactly what you’re up against, not just in theory.',
+  'Google Business Profile audit':
+    'For most Kenyan SMEs, this is worth more than any single on-page fix.',
+  'Schema & entity review':
+    'The structured data that helps Google — and increasingly AI models — understand exactly who you are.',
+  'Prioritized fix list — critical, important, nice-to-have':
+    'So you know what to do first, not just what’s wrong.',
+  '1-hour walkthrough call':
+    'I explain every finding in plain language, not jargon.',
+  '2 weeks of WhatsApp Q&A after delivery':
+    'For the follow-up questions that come up once you start implementing.',
+};
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd}>
+  <!-- Hero -->
+  <section class="bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h1 class="font-heading text-[clamp(2.25rem,4.5vw,3.5rem)] font-semibold leading-[1.1] tracking-tight text-ink">
+          SEO audit for Kenyan businesses — {prices.seoAudit.display.replace(' flat', '')}.
+        </h1>
+        <p class="mt-6 text-[1.0625rem] leading-relaxed text-muted">
+          A complete diagnosis of what's holding your site back on Google — delivered in 5–7 days
+          as a prioritized fix list.
+        </p>
+        <p class="mt-4 font-mono text-sm font-medium text-ink">{prices.seoAudit.display} &middot; 5–7 business days</p>
+        <div class="mt-8">
+          <CTAButton
+            size="lg"
+            message="Hi Vincent, I found admoran.com and I'm interested in the SEO audit."
+          >
+            Talk on WhatsApp
+          </CTAButton>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The problem this fixes -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          If your traffic is flat and you don't know why, this is for you.
+        </h2>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          Most businesses that come to me aren't sure whether their SEO problem is technical, or
+          content, or something someone else already tried and quietly failed to fix. Maybe
+          you've paid for SEO before and never got visibility into what actually happened. Maybe
+          you're weighing whether SEO is even worth serious investment for your business. The
+          audit answers that first, honestly — before you commit to anything ongoing.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's included -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+        What's included.
+      </h2>
+      <ul class="mt-8 max-w-prose space-y-5">
+        {
+          auditIncludes.map((item) => (
+            <li class="flex gap-3">
+              <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <div>
+                <p class="text-[1.0625rem] leading-relaxed text-ink">{item}</p>
+                {includesContext[item] && (
+                  <p class="mt-1 text-sm text-muted">{includesContext[item]}</p>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- How the audit works -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+        How the audit works.
+      </h2>
+      <div class="mt-8 grid gap-8 max-w-prose">
+        <div>
+          <p class="font-mono text-base font-medium text-ink">Day 1–2</p>
+          <p class="mt-2 text-[1.0625rem] leading-relaxed text-muted">
+            Technical crawl, Search Console and Analytics data pull, competitor mapping.
+          </p>
+        </div>
+        <div>
+          <p class="font-mono text-base font-medium text-ink">Day 3–4</p>
+          <p class="mt-2 text-[1.0625rem] leading-relaxed text-muted">
+            On-page review, schema and entity analysis, Google Business Profile audit.
+          </p>
+        </div>
+        <div>
+          <p class="font-mono text-base font-medium text-ink">Day 5</p>
+          <p class="mt-2 text-[1.0625rem] leading-relaxed text-muted">
+            Prioritization, report writing, Loom recording.
+          </p>
+        </div>
+        <div>
+          <p class="font-mono text-base font-medium text-ink">Day 6–7</p>
+          <p class="mt-2 text-[1.0625rem] leading-relaxed text-muted">
+            Walkthrough call, then a two-week Q&A window opens on WhatsApp.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What you get -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          What you get at the end.
+        </h2>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          A PDF report (roughly 15–20 pages) that doesn't just list problems but explains what
+          each one costs you. A ~30-minute Loom walkthrough you can rewatch or share with your
+          developer. A fix list ordered by priority that you can hand off or work through
+          yourself. And two weeks of WhatsApp access to ask questions as you implement.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who this is for -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="grid gap-10 max-w-prose">
+        <div>
+          <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+            Who this is for — and who it isn't.
+          </h2>
+        </div>
+        <div>
+          <p class="font-semibold text-ink">For:</p>
+          <p class="mt-2 text-[1.0625rem] leading-relaxed text-muted">
+            Businesses with a site that's underperforming, agencies wanting a second opinion, and
+            buyers who want to evaluate whether SEO is worth investing in seriously before
+            committing to ongoing work.
+          </p>
+        </div>
+        <div>
+          <p class="font-semibold text-ink">Not for:</p>
+          <p class="mt-2 text-[1.0625rem] leading-relaxed text-muted">
+            Brand-new sites with no data yet, businesses without a website at all, or buyers
+            looking for a "quick fix" rather than a proper diagnosis.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+        Audit FAQ.
+      </h2>
+      <div class="mt-8 max-w-prose">
+        {auditFaqs.map((faq) => <FAQItem question={faq.question} answer={faq.answer} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross-links + CTA -->
+  <CTASection class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 text-center md:py-24">
+      <p class="text-[1.0625rem] text-muted">
+        Considering ongoing help instead?
+        <a href="/seo-services/seo-retainer/" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">
+          See the monthly retainer &rarr;
+        </a>
+      </p>
+      <p class="mt-2 text-[1.0625rem] text-muted">
+        Want just local Maps ranking help?
+        <a href="/seo-services/local-seo/" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">
+          See local SEO &rarr;
+        </a>
+      </p>
+      <div class="mt-8">
+        <CTAButton
+          size="lg"
+          message="Hi Vincent, I found admoran.com and I'm interested in the SEO audit."
+        >
+          Talk on WhatsApp
+        </CTAButton>
+      </div>
+    </div>
+  </CTASection>
+</Layout>

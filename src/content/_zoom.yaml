@@ -1,0 +1,17 @@
+zoom_levels:
+  1: pillar
+  2: category
+  3: topic
+  4: atomic
+
+frames:
+  cost:    "What will this cost me?"
+  diy:     "Can I just do this myself?"
+  proof:   "Does this actually work?"
+  risk:    "Could this damage my site or waste my money?"
+  timing:  "How long before I see anything?"
+  fit:     "Is this for a business my size?"
+
+max_parents_warn: 3
+max_frames_warn: 2
+undersupply_threshold: 2.0

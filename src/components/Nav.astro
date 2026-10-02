@@ -1,0 +1,74 @@
+---
+import { Image } from 'astro:assets';
+import CTAButton from './CTAButton.astro';
+import logo from '../assets/logo.png';
+
+const links = [
+  { href: '/seo-services/', label: 'SEO' },
+  { href: '/web-design/', label: 'Web Design' },
+  { href: '/work/', label: 'Work' },
+  { href: '/guides/', label: 'Guides' },
+  { href: '/about/', label: 'About' },
+];
+
+const linkClass =
+  'text-[0.9375rem] font-medium text-ink underline decoration-transparent decoration-2 underline-offset-8 transition-colors hover:decoration-accent';
+---
+
+<header class="border-b border-line bg-panel">
+  <nav
+    class="mx-auto flex max-w-section items-center justify-between px-6 py-5"
+    aria-label="Primary"
+  >
+    <a href="/" class="shrink-0" aria-label="Admoran home">
+      <Image src={logo} alt="Admoran" width={298} height={102} class="h-[68px] w-auto" />
+    </a>
+
+    <div class="hidden items-center gap-8 md:flex">
+      {
+        links.map((link) => (
+          <a href={link.href} class={linkClass}>
+            {link.label}
+          </a>
+        ))
+      }
+      <CTAButton size="md">Talk on WhatsApp</CTAButton>
+    </div>
+
+    <button
+      id="nav-toggle"
+      type="button"
+      class="flex h-10 w-10 items-center justify-center rounded-lg border border-line md:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Toggle menu"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="hidden flex-col gap-4 border-t border-line px-6 py-6 md:hidden">
+    {
+      links.map((link) => (
+        <a href={link.href} class="text-base font-medium text-ink">
+          {link.label}
+        </a>
+      ))
+    }
+    <CTAButton size="md" class="w-fit">Talk on WhatsApp</CTAButton>
+  </div>
+</header>
+
+<script is:inline>
+  document.getElementById('nav-toggle').addEventListener('click', function () {
+    var menu = document.getElementById('mobile-menu');
+    var expanded = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', String(!expanded));
+    menu.classList.toggle('hidden');
+    menu.classList.toggle('flex');
+  });
+</script>

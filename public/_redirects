@@ -1,0 +1,27 @@
+# Spec §4 — extracted from admoranmarketing_WordPress_2026-08-08.xml.
+# /web-design/ is NOT redirected — same URL in the new build.
+
+/about-us/                                                     /about/                        301
+/contact-us/                                                   /contact/                      301
+/seo/                                                           /seo-services/                 301
+/content-marketing/                                             /seo-services/seo-retainer/    301
+/blog/                                                          /guides/                       301
+/resources-2/                                                   /guides/                       301
+/case-studies/                                                  /work/                         301
+/our-work/                                                      /work/                         301
+/project/decl-website/                                          /work/decl/                    301
+/project/smile-dent/                                            /work/smile-dent/              301
+/the-art-of-seo-driving-organic-growth-for-your-business/        /guides/seo-in-kenya/          301
+/hello-world/                                                    /guides/seo-in-kenya/          301
+/social-media-mastery-your-agencys-secret-weapon/                /guides/seo-in-kenya/          301
+
+# Spec §4 — three discontinued-service URLs with no equivalent page. No
+# backlink-tool access this pass to check referring domains (the spec's own
+# check-first instruction), so these default to 410 Gone — the safer
+# fallback when that check can't be run, per the spec's own rule for the
+# no-referring-domains case. Flagged in the build report: Vincent should
+# run the real backlink check and switch to a 301 (-> /seo-services/) for
+# any of the three that actually has referring domains.
+/social-media-marketing/                                        /404/                          410
+/email-marketing/                                                /404/                          410
+/marketing-automation/                                           /404/                          410

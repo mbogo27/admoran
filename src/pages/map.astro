@@ -1,0 +1,110 @@
+---
+// The public map page (§10). Renders the full computed graph — every
+// guide, its parents, its frames, and its computed links — in two views:
+// by zoom, and by frame, so both axes of the Zoom Map are visible. This
+// page shows structure only; the gap and shape reports are internal and
+// are never rendered here.
+import '../styles/global.css';
+import { buildGraph } from '../lib/graph.ts';
+import { zoomConfig, FRAMES, frameLabel } from '../lib/zoom.ts';
+import { NOINDEX, SITE_TITLE } from '../consts.ts';
+
+const graph = buildGraph();
+const nodes = [...graph.values()];
+
+const byZoom = new Map<number, typeof nodes>();
+for (const node of nodes) {
+  if (!byZoom.has(node.zoom)) byZoom.set(node.zoom, []);
+  byZoom.get(node.zoom)!.push(node);
+}
+for (const list of byZoom.values()) list.sort((a, b) => a.title.localeCompare(b.title));
+
+const byFrame = new Map<string, typeof nodes>();
+for (const frame of FRAMES) byFrame.set(frame, []);
+for (const node of nodes) {
+  for (const f of node.frames) byFrame.get(f)?.push(node);
+}
+for (const list of byFrame.values()) list.sort((a, b) => a.zoom - b.zoom || a.title.localeCompare(b.title));
+---
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Map | {SITE_TITLE}</title>
+  <meta name="description" content="The full Zoom Map: every guide, its parents, its frames, and its computed links, grouped by zoom and by frame." />
+  {NOINDEX && <meta name="robots" content="noindex, nofollow" />}
+</head>
+<body class="mx-auto max-w-5xl px-4 py-10">
+  <nav class="mb-8 text-sm text-muted">
+    <a class="hover:text-ink" href="/">Home</a>
+    <span class="mx-1">/</span>
+    <span class="text-muted">Map</span>
+  </nav>
+
+  <h1 class="mb-3 text-3xl font-heading font-semibold text-ink">The Zoom Map</h1>
+  <p class="mb-10 max-w-2xl text-muted">
+    Every guide organised along two independent axes: <strong>zoom</strong>, the level of abstraction, and
+    <strong>frame</strong>, the reader concern. Nothing below is hand-maintained — it is computed from each
+    guide's own frontmatter at build time.
+  </p>
+
+  <h2 class="mb-6 font-heading text-2xl font-semibold text-ink" id="by-zoom">By zoom</h2>
+  <div class="mb-16 space-y-10">
+    {[1, 2, 3, 4].map((zoom) => (
+      <section>
+        <h3 class="mb-1 font-heading text-lg font-semibold text-ink">
+          Zoom {zoom} — {zoomConfig.zoom_levels[zoom]}
+        </h3>
+        <p class="mb-4 text-sm text-muted">{(byZoom.get(zoom) ?? []).length} guide(s)</p>
+        <ul class="grid gap-4 sm:grid-cols-2">
+          {(byZoom.get(zoom) ?? []).map((node) => (
+            <li class="rounded border border-line p-4">
+              <a class="font-medium text-ink underline decoration-accent/40 underline-offset-2 hover:decoration-accent" href={`/guides/${node.slug}`}>
+                {node.title}
+              </a>
+              {node.parents.length > 0 && (
+                <p class="mt-1 text-xs text-muted">
+                  parents: {node.parents.join(', ')}
+                </p>
+              )}
+              {node.frames.length > 0 && (
+                <p class="mt-1 text-xs text-muted">
+                  frames: {node.frames.join(', ')}
+                </p>
+              )}
+              {node.children.length > 0 && (
+                <p class="mt-1 text-xs text-muted">
+                  children: {node.children.join(', ')}
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+
+  <h2 class="mb-6 font-heading text-2xl font-semibold text-ink" id="by-frame">By frame</h2>
+  <div class="space-y-10">
+    {FRAMES.map((frame) => (
+      <section>
+        <h3 class="mb-1 font-heading text-lg font-semibold text-ink">
+          {frameLabel(frame)} <span class="font-normal text-muted">({frame})</span>
+        </h3>
+        <p class="mb-4 text-sm text-muted">{(byFrame.get(frame) ?? []).length} guide(s)</p>
+        <ul class="grid gap-4 sm:grid-cols-2">
+          {(byFrame.get(frame) ?? []).map((node) => (
+            <li class="rounded border border-line p-4">
+              <a class="font-medium text-ink underline decoration-accent/40 underline-offset-2 hover:decoration-accent" href={`/guides/${node.slug}`}>
+                {node.title}
+              </a>
+              <p class="mt-1 text-xs text-muted">zoom {node.zoom} — {zoomConfig.zoom_levels[node.zoom]}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+</body>
+</html>

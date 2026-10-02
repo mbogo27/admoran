@@ -1,0 +1,58 @@
+---
+// The By concern index — zoom 1 only, replacing the frame block (§5.5).
+// Every page in the pillar's subtree, grouped under the six frame
+// questions. A page with two frames appears under both groups. This is
+// the highest-value page on the site, so it gets room rather than being
+// squeezed into a small box.
+//
+// CO-02 §5: titles only, no blurbs. Six frame groups times ~28 entries
+// with a full title and a two-line blurb each (doubled for any page
+// with two frames) was denser than anything else on the site. `summary`
+// moves to a `title` attribute — available on hover, invisible
+// otherwise — since these titles are already descriptive sentences and
+// carry the weight alone.
+import type { GuideNode } from '../lib/graph.ts';
+import { FRAMES, zoomConfig } from '../lib/zoom.ts';
+
+interface Props {
+  node: GuideNode;
+  graph: Map<string, GuideNode>;
+}
+const { node, graph } = Astro.props;
+
+const subtree = new Set<string>();
+const stack = [...node.children];
+while (stack.length) {
+  const slug = stack.pop()!;
+  if (subtree.has(slug)) continue;
+  subtree.add(slug);
+  const child = graph.get(slug);
+  if (child) stack.push(...child.children);
+}
+
+const subtreeNodes = [...subtree].map((s) => graph.get(s)).filter((n): n is GuideNode => Boolean(n));
+
+const groups = FRAMES.map((frame) => ({
+  frame,
+  question: zoomConfig.frames[frame],
+  pages: subtreeNodes.filter((n) => n.frames.includes(frame)).sort((a, b) => a.zoom - b.zoom || a.title.localeCompare(b.title)),
+})).filter((g) => g.pages.length > 0);
+---
+
+<section class="my-10 border-t border-line pt-8">
+  <h2 class="mb-6 font-heading text-2xl font-semibold text-ink">Browse by concern</h2>
+  <div class="grid gap-8 sm:grid-cols-2">
+    {groups.map((group) => (
+      <div>
+        <h3 class="mb-3 font-heading text-lg font-semibold text-ink">{group.question}</h3>
+        <ul class="space-y-2">
+          {group.pages.map((page) => (
+            <li>
+              <a class="text-ink underline decoration-accent/40 underline-offset-2 hover:decoration-accent" href={`/guides/${page.slug}`} title={page.summary}>{page.title}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</section>

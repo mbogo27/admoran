@@ -1,0 +1,40 @@
+---
+// Header block. Rendered for zoom 2, 3 and 4 only — never zoom 1. See spec §5.1.
+// This is a header block: it must render before <slot /> in Guide.astro,
+// never interleaved into the body (§5.3).
+import type { GuideNode } from '../lib/graph.ts';
+
+interface Props {
+  node: GuideNode;
+  graph: Map<string, GuideNode>;
+}
+const { node, graph } = Astro.props;
+
+const primary = node.primaryParent ? graph.get(node.primaryParent) : null;
+const otherParents = node.parents.filter((p) => p !== node.primaryParent).map((p) => graph.get(p)).filter(Boolean) as GuideNode[];
+---
+
+{node.zoom === 2 && primary && (
+  <p class="mb-6 text-sm text-muted">
+    Part of <a class="text-ink underline decoration-accent/40 underline-offset-2 hover:decoration-accent" href={`/guides/${primary.slug}`}>{primary.title}</a>
+  </p>
+)}
+
+{node.zoom === 3 && (primary || otherParents.length > 0) && (
+  <p class="mb-6 text-sm text-muted">
+    Part of{' '}
+    {primary && <a class="text-ink underline decoration-accent/40 underline-offset-2 hover:decoration-accent" href={`/guides/${primary.slug}`}>{primary.title}</a>}
+    {otherParents.map((p) => (
+      <>
+        {', '}
+        <a class="text-ink underline decoration-accent/40 underline-offset-2 hover:decoration-accent" href={`/guides/${p.slug}`}>{p.title}</a>
+      </>
+    ))}
+  </p>
+)}
+
+{node.zoom === 4 && primary && (
+  <p class="mb-6 text-sm text-muted">
+    From the <a class="text-ink underline decoration-accent/40 underline-offset-2 hover:decoration-accent" href={`/guides/${primary.slug}`}>{primary.title}</a> guide
+  </p>
+)}

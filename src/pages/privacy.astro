@@ -1,0 +1,41 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = 'Privacy Policy | Admoran';
+const description = 'How Admoran collects and uses information from visitors to admoran.com.';
+---
+
+<Layout title={title} description={description}>
+  <section class="mx-auto max-w-section px-6 py-16 md:py-24">
+    <div class="max-w-prose">
+      <h1 class="font-heading text-[clamp(2rem,4vw,3rem)] font-semibold tracking-tight text-ink">
+        Privacy policy.
+      </h1>
+      <p class="mt-6 text-sm text-muted">Last updated: August 2026.</p>
+
+      <div class="mt-8 space-y-6 text-[1.0625rem] leading-relaxed text-muted">
+        <p>
+          This site is run by Vincent Mbogo, trading as Admoran. This policy covers what happens
+          to information collected when you visit admoran.com or contact me through it.
+        </p>
+        <h2 class="font-heading text-xl font-semibold text-ink">What I collect</h2>
+        <p>
+          Standard analytics data (pages visited, approximate location, device type, referral
+          source) via Google Analytics, used to understand how the site is used and to improve it.
+          If you contact me via WhatsApp, I see whatever you send in that conversation — your
+          phone number, your message, and anything else you choose to share.
+        </p>
+        <h2 class="font-heading text-xl font-semibold text-ink">What I don't do</h2>
+        <p>
+          I don't sell or share your information with third parties for marketing purposes. I
+          don't use tracking beyond standard analytics.
+        </p>
+        <h2 class="font-heading text-xl font-semibold text-ink">Contact</h2>
+        <p>
+          Questions about this policy — reach me on
+          <a href="https://wa.me/254743747496" target="_blank" rel="noopener noreferrer" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">WhatsApp</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

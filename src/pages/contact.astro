@@ -1,0 +1,89 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CTAButton from '../components/CTAButton.astro';
+import CTASection from '../components/CTASection.astro';
+
+const title = 'Contact Vincent Mbogo — SEO Consultant Nairobi | Admoran';
+const description =
+  'WhatsApp Vincent Mbogo about SEO for your Kenyan business. Usually replies within a few hours during Nairobi business hours.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contact Vincent Mbogo',
+  url: 'https://admoran.com/contact/',
+};
+
+const contactMessage =
+  "Hi Vincent, found you via admoran.com. My site is [URL] and I'm looking at [audit / GBP / retainer].";
+
+const checklist = [
+  'Your website URL',
+  "What you're trying to fix (rankings, traffic, GBP, general audit)",
+  'Rough monthly SEO budget (helps me point you at the right offer honestly)',
+  'Any deadlines or trigger events (site relaunch, new competitor, previous SEO gone wrong)',
+];
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd}>
+  <!-- Header -->
+  <section class="mx-auto max-w-section px-6 py-16 md:py-24">
+    <div class="max-w-prose">
+      <h1 class="font-heading text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-[1.05] tracking-tight text-ink">
+        Let's talk.
+      </h1>
+      <p class="mt-6 text-[1.0625rem] leading-relaxed text-muted">
+        The fastest way to reach me is WhatsApp.
+      </p>
+    </div>
+  </section>
+
+  <!-- Primary CTA -->
+  <section class="border-t border-line bg-tint">
+    <div class="mx-auto max-w-section px-6 py-16 text-center md:py-24">
+      <CTAButton size="lg" message={contactMessage}>Talk on WhatsApp</CTAButton>
+    </div>
+  </section>
+
+  <!-- Response expectation -->
+  <section class="mx-auto max-w-section px-6 py-16 md:py-24">
+    <div class="max-w-prose">
+      <p class="text-[1.0625rem] leading-relaxed text-muted">
+        I usually reply within a few hours during Nairobi business hours (Monday–Friday, 9am–6pm
+        EAT). Weekends and evenings — same day if I'm around, next morning otherwise.
+      </p>
+    </div>
+  </section>
+
+  <!-- What to include -->
+  <section class="border-t border-line bg-tint">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          What to include in your first message.
+        </h2>
+        <ul class="mt-6 space-y-3">
+          {
+            checklist.map((item) => (
+              <li class="flex gap-3 text-[1.0625rem] leading-relaxed text-muted">
+                <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+        <p class="mt-6 text-[1.0625rem] leading-relaxed text-ink">
+          I don't do generic sales calls. First message → I look at your site → I tell you
+          honestly whether I can help. If I can't, I'll say so.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA repeat -->
+  <CTASection class="border-t border-line">
+    <div class="mx-auto max-w-section px-6 py-16 text-center md:py-24">
+      <CTAButton size="lg" message={contactMessage}>Talk on WhatsApp</CTAButton>
+    </div>
+  </CTASection>
+</Layout>

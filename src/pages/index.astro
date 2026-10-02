@@ -1,0 +1,478 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import CTAButton from '../components/CTAButton.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import FAQItem from '../components/FAQItem.astro';
+import IndustryPill from '../components/IndustryPill.astro';
+import headshot from '../assets/vincent-mbogo.jpeg';
+import heroBg from '../assets/hero-bg.jpg';
+import seoImage from '../assets/seo-4.webp';
+import seoVsAdsImage from '../assets/seo-vs-ads.png';
+import ProjectCard from '../components/ProjectCard.astro';
+import LogoStrip from '../components/LogoStrip.astro';
+import CTASection from '../components/CTASection.astro';
+import arrowDental from '../assets/clients-logos/arrow-dental-centre.png';
+import kongoKega from '../assets/clients-logos/kongo-kega.png';
+import lionsLoresho from '../assets/clients-logos/lions-loresho-hospital.png';
+import reachAndRise from '../assets/clients-logos/reach-and-rise-ict.png';
+import weynTech from '../assets/clients-logos/weyn-tech.png';
+import { offers } from '../data/services';
+import { industries } from '../data/industries';
+import { homeFaqs } from '../data/faqs';
+import { prices } from '../data/pricing';
+import { projects } from '../data/projects';
+
+const title = 'SEO Services in Kenya — Vincent Mbogo, SEO Consultant Nairobi | Admoran';
+const description =
+  'SEO and web design for Kenyan businesses, from Vincent Mbogo. Local search and AI visibility, fixed-price audits from KES 35k, web builds from KES 50k. Nairobi-based, working across Kenya.';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Vincent Mbogo',
+    jobTitle: 'SEO Consultant',
+    url: 'https://admoran.com/about/',
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Admoran',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: 'Admoran',
+    provider: {
+      '@type': 'Person',
+      name: 'Vincent Mbogo',
+    },
+    areaServed: 'Kenya',
+    priceRange: 'KES 25,000 – KES 150,000',
+    serviceType: ['Search Engine Optimization', 'Web Design'],
+    url: 'https://admoran.com/',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: homeFaqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  },
+];
+
+const clientLogos = [
+  { name: 'Arrow Dental Centre', src: arrowDental },
+  { name: 'Lions Loresho Hospital', src: lionsLoresho },
+  { name: 'Reach & Rise ICT Solutions', src: reachAndRise },
+  { name: 'Kongo Kega', src: kongoKega },
+  { name: 'Weyn Technologies', src: weynTech },
+];
+
+const comparison = [
+  {
+    label: 'Monthly Cost (Kenya)',
+    consultant: 'KES 45k–100k',
+    agency: 'KES 80k–300k+',
+    freelancer: 'KES 5k–25k',
+  },
+  {
+    label: 'Who Does the Work',
+    consultant: 'The expert you hired',
+    agency: 'Junior team members',
+    freelancer: 'Variable / Unvetted',
+  },
+  {
+    label: 'Direct Contact',
+    consultant: 'Direct line to specialist',
+    agency: 'Account manager middleman',
+    freelancer: 'Chat platform only',
+  },
+  {
+    label: 'Depth & Focus',
+    consultant: 'High, dedicated focus',
+    agency: 'Variable (split across clients)',
+    freelancer: 'Low / Task-focused',
+  },
+  {
+    label: 'Best For',
+    consultant: 'SMEs with real growth intent',
+    agency: 'Large enterprises, multi-market',
+    freelancer: 'One-off, low-stake tasks',
+  },
+  {
+    label: 'Primary Risk',
+    consultant: '"Bus factor" of 1',
+    agency: 'High churn & overhead costs',
+    freelancer: 'Unpredictable quality',
+  },
+];
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd}>
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-paper">
+    <Image
+      src={heroBg}
+      alt=""
+      role="presentation"
+      width={1600}
+      height={900}
+      loading="eager"
+      fetchpriority="high"
+      class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-40"
+    />
+    <div class="relative mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="flex flex-col items-start gap-12 md:flex-row md:items-center">
+        <div class="w-full md:w-[60%]">
+          <h1 class="text-sm font-medium uppercase tracking-wide text-ink">
+            SEO Consultant in Kenya
+          </h1>
+          <h3 class="mt-4 text-balance font-heading text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-[1.05] tracking-tight text-ink">
+            Hi, I'm Vincent. I build and rank websites for Kenyan businesses.
+          </h3>
+          <p class="mt-6 max-w-prose text-[1.0625rem] leading-relaxed text-muted">
+            Web design and SEO, from one person instead of two vendors pointing fingers at each
+            other. Solo consultant, honest pricing, real results — for clinics, professional
+            services, and growing SMEs across Nairobi and Kenya.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-6">
+            <CTAButton size="lg">Talk on WhatsApp</CTAButton>
+            <a href="#services" class="font-semibold text-ink underline decoration-muted/40 underline-offset-4 hover:decoration-accent">
+              See what I do
+            </a>
+          </div>
+          <p class="mt-4 text-sm text-muted">Usually replies within a few hours. Nairobi-based.</p>
+        </div>
+        <div class="w-full shrink-0 md:w-[40%]">
+          <Image
+            src={headshot}
+            alt="Vincent Mbogo, SEO consultant in Nairobi"
+            width={360}
+            height={360}
+            class="mx-auto rounded-2xl object-cover"
+          />
+          <p class="mt-3 text-center text-sm text-muted">Vincent Mbogo — SEO Consultant, Nairobi</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust strip -->
+  <section class="border-y border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-10 text-center">
+      <p class="text-sm font-medium uppercase tracking-wide text-muted">Trusted by growing businesses</p>
+      <div class="mt-6">
+        <LogoStrip logos={clientLogos} />
+      </div>
+    </div>
+  </section>
+
+  <!-- What I do -->
+  <section class="bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="flex flex-col items-center gap-12 md:flex-row">
+        <div class="w-full md:w-[55%]">
+          <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+            SEO that ranks on Google and gets you recommended by AI Search.
+          </h2>
+          <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+            SEO in Kenya today means getting your Google Business Profile right, fixing the technical
+            issues holding your site back, showing up for local search intent, and publishing content
+            that actually answers what your customers are asking. It's not a mystery — it's disciplined,
+            unglamorous work done consistently.
+          </p>
+          <p class="mt-4 text-[1.0625rem] leading-relaxed text-muted">
+            What's changed is where searches happen. ChatGPT, Perplexity, and Google's AI Mode are
+            increasingly the first stop, and they favor businesses with clean entity data and
+            well-structured content over businesses that merely rank. Entity-level SEO — the kind that
+            makes both Google and AI models understand exactly who you are and what you offer — matters
+            for Kenyan businesses now, not in some future roadmap.
+          </p>
+        </div>
+        <div class="w-full shrink-0 md:w-[45%]">
+          <Image
+            src={seoImage}
+            alt="SEO dashboard overlay on a laptop, showing search visibility metrics"
+            width={640}
+            height={533}
+            class="mx-auto rounded-2xl object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How to work with me: SEO + web design, both real service lines -->
+  <section id="services" class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+        How to work with me.
+      </h2>
+
+      <p class="mt-8 text-sm font-semibold uppercase tracking-wide text-muted">SEO</p>
+      <div class="mt-4 grid gap-6 md:grid-cols-3">
+        {
+          offers.map((offer) => (
+            <ServiceCard
+              name={offer.name}
+              price={offer.price}
+              timeframe={offer.timeframe}
+              description={offer.description}
+              href={offer.href}
+            />
+          ))
+        }
+      </div>
+
+      <p class="mt-10 text-sm font-semibold uppercase tracking-wide text-muted">Web design</p>
+      <div class="mt-4 grid gap-6 md:grid-cols-3">
+        <ServiceCard
+          name="Web Design"
+          price={prices.webDesignFrom.display}
+          timeframe="2–3 weeks"
+          description="A site built with the SEO fundamentals — structure, speed, schema — decided at build time, not retrofitted after launch."
+          href="/web-design/"
+        />
+        <ServiceCard
+          name="Website Redesign"
+          price={prices.webDesignFrom.display}
+          timeframe="2–3 weeks"
+          description="Fixes what search can see — without losing the rankings and content the old site already earned."
+          href="/web-design/website-redesign/"
+        />
+        <ServiceCard
+          name="Ecommerce Web Design"
+          price={prices.ecommerceFrom.display}
+          timeframe="4+ weeks"
+          description="A real storefront — payment integration, product structure, and M-Pesa — not a brochure site with a cart bolted on."
+          href="/web-design/ecommerce/"
+        />
+      </div>
+      <p class="mt-6 text-[1.0625rem] leading-relaxed text-muted">
+        Most of the SEO work above is fixing what a rushed build got wrong. Building the site
+        myself means that work doesn't need to happen twice.
+      </p>
+    </div>
+  </section>
+
+  <!-- Recent work -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">Recent work.</h2>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        {projects.filter((p) => p.featured).map((project) => <ProjectCard project={project} />)}
+      </div>
+      <a href="/work/" class="mt-8 inline-block font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">
+        See the full portfolio &rarr;
+      </a>
+    </div>
+  </section>
+
+  <!-- How I work -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">How I actually work.</h2>
+      <div class="mt-10 grid gap-10 md:grid-cols-3">
+        <div>
+          <p class="font-mono text-base font-medium text-ink">Step 1 — Audit</p>
+          <p class="mt-3 text-[1.0625rem] leading-relaxed text-muted">
+            I dig into your site's technical health, current rankings, competitors, and search
+            opportunities. You get a prioritized fix list — no fluff.
+          </p>
+        </div>
+        <div>
+          <p class="font-mono text-base font-medium text-ink">Step 2 — Fix</p>
+          <p class="mt-3 text-[1.0625rem] leading-relaxed text-muted">
+            I address technical issues, on-page problems, schema/entity gaps, and Google Business
+            Profile blind spots. Real changes, not screenshots of Ahrefs graphs.
+          </p>
+        </div>
+        <div>
+          <p class="font-mono text-base font-medium text-ink">Step 3 — Grow</p>
+          <p class="mt-3 text-[1.0625rem] leading-relaxed text-muted">
+            Monthly content, link acquisition, AI-visibility optimization, and clear reporting on
+            what moved and why.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEO consultant vs SEO agency -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div>
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          SEO Consultant vs. SEO Agency in Kenya: Which Is Right for You?
+        </h2>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          When you hire an agency, a significant chunk of your retainer covers account managers,
+          sales teams, and office overhead. Worse, your site is often passed off to a junior fresh
+          out of a bootcamp. When you hire a solo consultant, every audit, fix, and strategy call
+          is handled directly by the specialist you hired.
+        </p>
+      </div>
+
+      <div class="mt-8 overflow-x-auto">
+        <table class="w-full min-w-[560px] border-collapse text-left">
+          <thead>
+            <tr class="border-b border-line">
+              <th class="py-3 pr-4 text-sm font-medium uppercase tracking-wide text-muted"></th>
+              <th class="py-3 px-4 font-heading text-base font-semibold text-ink">Solo Consultant</th>
+              <th class="py-3 px-4 font-heading text-base font-semibold text-ink">SEO Agency</th>
+              <th class="py-3 px-4 font-heading text-base font-semibold text-ink">Freelancer (Fiverr/Upwork)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              comparison.map((row) => (
+                <tr class="border-b border-line">
+                  <td class="py-3 pr-4 text-sm font-medium text-muted">{row.label}</td>
+                  <td class="py-3 px-4 text-[0.9375rem] text-ink">{row.consultant}</td>
+                  <td class="py-3 px-4 text-[0.9375rem] text-muted">{row.agency}</td>
+                  <td class="py-3 px-4 text-[0.9375rem] text-muted">{row.freelancer}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-10">
+        <h3 class="font-heading text-lg font-semibold text-ink">Choosing the right fit.</h3>
+        <ul class="mt-4 grid gap-6 md:grid-cols-3">
+          <li class="flex gap-3 text-[1.0625rem] leading-relaxed text-muted">
+            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+            <span><strong class="text-ink">Go with an agency if:</strong> you have a massive e-commerce portal, operate across multiple international markets, or need broad enterprise-level brand strategy that requires a full team.</span>
+          </li>
+          <li class="flex gap-3 text-[1.0625rem] leading-relaxed text-muted">
+            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+            <span><strong class="text-ink">Go with a freelancer if:</strong> you need a single, low-stakes task executed cheaply, like fixing a broken link or basic formatting.</span>
+          </li>
+          <li class="flex gap-3 text-[1.0625rem] leading-relaxed text-muted">
+            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+            <span><strong class="text-ink">Go with a solo consultant if:</strong> you're an SME with a monthly SEO budget under KES 100k, looking for high-depth strategy, direct communication, and maximum return per shilling.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who this is for -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">Who I work with.</h2>
+      <p class="mt-4 text-[1.0625rem] leading-relaxed text-muted">
+        Kenyan SMEs where organic search is a real growth channel. Especially:
+      </p>
+      <div class="mt-8 flex flex-wrap justify-between gap-3">
+        {industries.map((industry) => <IndustryPill label={industry} />)}
+      </div>
+      <p class="mt-8 text-[1.0625rem] text-ink">
+        Not sure if your business fits? Ask on WhatsApp — I'll be honest.
+      </p>
+    </div>
+  </section>
+
+  <!-- SEO vs Paid Ads -->
+  <section class="border-t border-line bg-tint">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="flex flex-col items-center gap-12 md:flex-row">
+        <div class="w-full md:w-[55%]">
+          <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+            SEO vs paid ads: which one do you actually need?
+          </h2>
+          <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+            Paid ads are rented traffic — the moment you stop paying, the leads stop. SEO is owned
+            traffic that compounds over 6–18 months and keeps working after you've paid for it.
+          </p>
+          <p class="mt-4 text-[1.0625rem] leading-relaxed text-muted">
+            For most Kenyan SMEs, the honest answer is <em>both, at different stages</em>. Paid ads
+            to test offers and get early revenue. SEO to build a durable customer acquisition
+            channel. But if you're picking one for the long haul, SEO wins on unit economics almost
+            every time.
+          </p>
+          <p class="mt-4 text-sm text-muted">
+            Ask me on WhatsApp if you want a candid take on your specific situation.
+          </p>
+        </div>
+        <div class="w-full shrink-0 md:w-[45%]">
+          <Image
+            src={seoVsAdsImage}
+            alt="SEO versus paid ads, illustrated as a boxing match"
+            width={500}
+            height={500}
+            class="mx-auto w-full max-w-sm rounded-2xl object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Availability -->
+  <section class="bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16">
+      <div class="mx-auto max-w-prose rounded-2xl border border-line bg-white px-8 py-6 text-center">
+        <p class="text-[1.0625rem] text-ink">
+          Currently taking on new clients. See
+          <a href="/work/decl/" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">how this played out for DECL</a>,
+          or browse the full <a href="/work/" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">portfolio</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-12">
+        <div class="md:col-span-4">
+          <div class="md:sticky md:top-8">
+            <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+              Frequently asked questions.
+            </h2>
+            <p class="mt-4 text-[1.0625rem] leading-relaxed text-muted">
+              The questions that come up most often, answered honestly.
+            </p>
+            <div class="mt-6 rounded-2xl border border-line bg-panel p-6">
+              <p class="text-[1.0625rem] leading-relaxed text-ink">
+                Have a question not listed here?
+              </p>
+              <p class="mt-1 text-sm text-muted">
+                Send a quick WhatsApp message and I'll answer directly.
+              </p>
+              <div class="mt-4">
+                <CTAButton size="md">Talk on WhatsApp</CTAButton>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="md:col-span-8">
+          {homeFaqs.map((faq) => <FAQItem question={faq.question} answer={faq.answer} />)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <CTASection class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 text-center md:py-24">
+      <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+        Ready to get found — or get a site that can be?
+      </h2>
+      <p class="mx-auto mt-4 max-w-prose text-[1.0625rem] text-muted">
+        Send a WhatsApp with your site URL, or tell me you don't have one yet. I'll take a quick
+        look and tell you honestly what I see.
+      </p>
+      <div class="mt-8">
+        <CTAButton size="lg">Talk on WhatsApp</CTAButton>
+      </div>
+    </div>
+  </CTASection>
+</Layout>

@@ -1,0 +1,39 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Analytics from '../components/Analytics.astro';
+import SEO from '../components/SEO.astro';
+import { NOINDEX } from '../consts.ts';
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  robots?: string;
+  /** Spec §5 — per-page override. draft:true always noindexes, regardless of NOINDEX. */
+  draft?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { title, description, ogImage, robots, draft = false, jsonLd } = Astro.props;
+const resolvedRobots = robots ?? (draft || NOINDEX ? 'noindex, nofollow' : 'index, follow');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <SEO title={title} description={description} ogImage={ogImage} robots={resolvedRobots} jsonLd={jsonLd} />
+    <Analytics />
+  </head>
+  <body class="flex min-h-screen flex-col bg-paper font-body text-ink antialiased">
+    <Nav />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

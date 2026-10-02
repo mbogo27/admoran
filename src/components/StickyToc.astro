@@ -1,0 +1,31 @@
+---
+// Persistent navigation rail — zoom 1 only (CO-02 §1). Reverses Change
+// Order 01's "no TOC at zoom 1" call: that call held only so long as a
+// sticky rail wasn't on the table. With nav on a persistent surface
+// outside the content column, the content column is free to teach
+// before it dispatches. Desktop only — below 1024px it does not render
+// at all, not just hidden with CSS, since a rail on a phone eats the
+// viewport and Kenyan traffic is heavily mobile.
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+}
+const { headings } = Astro.props;
+const items = headings.filter((h) => h.depth === 2);
+---
+
+{items.length > 0 && (
+  <nav class="sticky-toc hidden lg:block lg:sticky lg:top-8 lg:self-start lg:max-h-[calc(100vh-4rem)] lg:overflow-y-auto lg:text-sm" aria-label="Sections of this guide">
+    <p class="mb-2 font-semibold text-muted">In this guide</p>
+    <ol class="space-y-1">
+      {items.map((h) => (
+        <li><a class="text-ink underline decoration-accent/40 underline-offset-2 hover:decoration-accent" href={`#${h.slug}`}>{h.text}</a></li>
+      ))}
+    </ol>
+  </nav>
+)}

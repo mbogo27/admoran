@@ -1,0 +1,160 @@
+---
+// Evidence rules — spec §8.5, binding. Two claims were available in the
+// source material (the WordPress export at admoranmarketing_WordPress_2026-08-08.xml):
+// a vague "ranks first for several keywords" line with no named queries or
+// dated export, and no lead-attribution figure at all (the 70% example in
+// the spec itself was illustrative, not real data pulled from this client).
+// Neither clears the bar: "ranks for most keywords" is unverifiable by a
+// reader, and there is no owner quote to attribute a lead percentage to.
+// Per §8.5, the page ships without either claim. Vincent can add both once
+// he has a dated GSC export with named queries and an actual quote from
+// Godfrey — see the build report.
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import CTAButton from '../../components/CTAButton.astro';
+import CTASection from '../../components/CTASection.astro';
+import screenshot from '../../assets/decl-website.png';
+
+const title = 'DECL Website — Environmental Consultancy Web Design Case Study | Admoran';
+const description =
+  'How I built the website for DECL, a Kenyan environmental consultancy specialising in ESIA and Environmental Audit, from zero online presence to a live, structured, search-ready site.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'DECL Website — a case study',
+  about: {
+    '@type': 'Service',
+    name: 'Web Design',
+    url: 'https://admoran.com/web-design/',
+  },
+  author: { '@type': 'Person', name: 'Vincent Mbogo' },
+  url: 'https://admoran.com/work/decl/',
+};
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd}>
+  <!-- Header -->
+  <section class="bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <p class="text-sm font-medium uppercase tracking-wide text-muted">Environmental consultancy &middot; Web design + SEO</p>
+        <h1 class="mt-3 font-heading text-[clamp(2.25rem,4.5vw,3.5rem)] font-semibold leading-[1.1] tracking-tight text-ink">
+          DECL — a website built for a firm that had never needed one before.
+        </h1>
+        <p class="mt-6 text-[1.0625rem] leading-relaxed text-muted">
+          Diligent Environmental Consultancy Limited, a Kenyan firm specialising in Environmental
+          and Social Impact Assessment (ESIA) and Environmental Audit (EA).
+        </p>
+        <a
+          href="https://decl.co.ke/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-3 inline-block font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
+        >
+          decl.co.ke &rarr;
+        </a>
+      </div>
+      <div class="mx-auto mt-10 max-w-3xl">
+        <Image src={screenshot} alt="The DECL website, shown on desktop and mobile" width={1000} height={650} class="w-full rounded-2xl border border-line" />
+      </div>
+    </div>
+  </section>
+
+  <!-- The situation -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          The situation.
+        </h2>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          DECL's founder, Godfrey Njugi, had built a real consultancy practice with no online
+          presence and no organic lead channel — new work came entirely through referral and
+          direct relationships. ESIA and EA are high-consideration, search-led purchases: a
+          procurement officer, a developer, or an NGO looking for a licensed environmental
+          consultant is exactly the kind of buyer who searches for one and converts from what they
+          find. Without a site, that entire channel was closed off.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What I did -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          What I did.
+        </h2>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          I designed and built the site from a blank slate: a structure organised around what DECL
+          actually does — ESIA, Environmental Audit, and the specific regulatory work under each —
+          rather than a generic "services" page that tries to cover everything in one paragraph.
+          Each service area got its own page, targeted at the specific terms a buyer searching for
+          a licensed environmental consultant in Kenya would actually use.
+        </p>
+        <p class="mt-4 text-[1.0625rem] leading-relaxed text-muted">
+          On the technical side: clean URL structure from launch, schema markup identifying DECL as
+          a professional service provider, a responsive build that works on the mobile connections
+          most Kenyan searches happen on, and Google Analytics and Search Console configured before
+          launch — not bolted on once someone asked whether it was working.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What happened -->
+  <section class="border-t border-line bg-white">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          What happened.
+        </h2>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          The site has been live and indexed since 2023, giving DECL a findable presence for its
+          specific service area that didn't exist before. What I don't have yet is a dated ranking
+          export with named queries, or a sourced figure for how much of DECL's enquiry volume now
+          comes through the site — so I'm not printing either here. A vague "ranks for most
+          keywords" is a claim, not a result, and this is the page on the whole site that most
+          needs to be trusted. When Godfrey and I pull a current Search Console export, the
+          specific queries and positions will replace this paragraph.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What I'd do differently -->
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 md:py-24">
+      <div class="max-w-prose">
+        <h2 class="font-heading text-[2rem] font-semibold tracking-tight text-ink">
+          What I'd do differently.
+        </h2>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          I'd have set up a lightweight way to track enquiry source from day one — even a simple
+          "how did you hear about us" field — instead of relying on Godfrey's recollection months
+          later. It's a small thing that would have made this exact case study easier to write
+          honestly, sooner.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTASection class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-section px-6 py-16 text-center md:py-24">
+      <p class="text-[1.0625rem] text-muted">
+        Want a site built the same way?
+        <a href="/web-design/" class="font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent">
+          See web design services &rarr;
+        </a>
+      </p>
+      <div class="mt-8">
+        <CTAButton size="lg" message="Hi Vincent, I found the DECL case study on admoran.com and I'd like to talk about a website build.">
+          Talk on WhatsApp
+        </CTAButton>
+      </div>
+    </div>
+  </CTASection>
+</Layout>

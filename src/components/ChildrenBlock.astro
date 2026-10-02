@@ -1,0 +1,61 @@
+---
+// Generic titled link list, used for every computed or declared list block
+// except the frame block and By concern: "In this guide", "Guides in this
+// section", "Common questions", "Related guides", "See also", and the
+// zoom-4 "Back to [parent]" footer. Each target's `summary` is used as
+// the blurb (§5.6). Renders nothing if the list is empty — no placeholder
+// text, no empty heading (§5.6).
+//
+// v0.2.1 patch 1: when the slugs span more than one zoom level, group
+// them under a zoom-level label instead of one flat list — the flat list
+// across zooms was reading as unstructured. `slugs` arrives already
+// ordered by child_order (from graph.ts); order is preserved within each
+// group, never re-sorted.
+import type { GuideNode } from '../lib/graph.ts';
+
+interface Props {
+  title: string;
+  slugs: string[];
+  graph: Map<string, GuideNode>;
+  groupByZoom?: boolean;
+}
+const { title, slugs, graph, groupByZoom = true } = Astro.props;
+
+const items = slugs.map((s) => graph.get(s)).filter((n): n is GuideNode => Boolean(n));
+
+const ZOOM_LABELS: Record<number, string> = {
+  1: 'Pillar',
+  2: 'Categories',
+  3: 'Specific topics',
+  4: 'Quick answers',
+};
+
+const zooms = [...new Set(items.map((n) => n.zoom))].sort((a, b) => a - b);
+
+const groups =
+  groupByZoom && zooms.length > 1
+    ? zooms.map((z) => ({
+        label: ZOOM_LABELS[z] ?? `Level ${z}`,
+        nodes: items.filter((n) => n.zoom === z),
+      }))
+    : [{ label: null as string | null, nodes: items }];
+---
+
+{items.length > 0 && (
+  <section class="my-8 border-t border-line pt-6">
+    <h2 class="mb-3 font-heading text-xl font-semibold text-ink">{title}</h2>
+    {groups.map((g) => (
+      <>
+        {g.label && <p class="mt-4 mb-2 text-xs font-semibold uppercase tracking-wide text-muted first:mt-0">{g.label}</p>}
+        <ul class="space-y-3">
+          {g.nodes.map((item) => (
+            <li>
+              <a class="font-medium text-ink underline decoration-accent/40 underline-offset-2 hover:decoration-accent" href={`/guides/${item.slug}`}>{item.title}</a>
+              {item.summary && <p class="text-sm text-muted">{item.summary}</p>}
+            </li>
+          ))}
+        </ul>
+      </>
+    ))}
+  </section>
+)}

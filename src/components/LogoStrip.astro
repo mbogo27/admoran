@@ -1,0 +1,27 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+export interface Logo {
+  name: string;
+  src: ImageMetadata;
+}
+
+export interface Props {
+  logos?: Logo[];
+}
+
+const { logos = [] } = Astro.props;
+---
+
+{
+  logos.length > 0 && (
+    <div class="flex w-full flex-wrap items-center justify-between gap-6">
+      {logos.map((logo) => (
+        <div class="flex h-28 w-full max-w-[13rem] flex-1 items-center justify-center rounded-xl bg-panel p-5">
+          <Image src={logo.src} alt={logo.name} width={300} height={150} class="h-auto max-h-16 w-auto max-w-full object-contain" loading="lazy" />
+        </div>
+      ))}
+    </div>
+  )
+}

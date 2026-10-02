@@ -1,0 +1,25 @@
+---
+export interface Props {
+  name: string;
+  price: string;
+  timeframe: string;
+  description: string;
+  href: string;
+}
+
+const { name, price, timeframe, description, href } = Astro.props;
+---
+
+<div class="flex flex-col rounded-2xl border border-line bg-white p-8">
+  <h3 class="font-heading text-[1.375rem] font-semibold text-ink">{name}</h3>
+  <p class="mt-2 font-mono text-lg font-medium text-ink">{price}</p>
+  <p class="mt-1 text-sm text-muted">{timeframe}</p>
+  <p class="mt-4 flex-1 text-[1.0625rem] leading-relaxed text-ink">{description}</p>
+  <a
+    href={href}
+    class="mt-6 inline-flex w-fit items-center gap-1 font-semibold text-ink underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
+  >
+    Learn more about {name}
+    <span aria-hidden="true">&rarr;</span>
+  </a>
+</div>

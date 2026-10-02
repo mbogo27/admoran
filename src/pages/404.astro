@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CTAButton from '../components/CTAButton.astro';
+import CTASection from '../components/CTASection.astro';
+
+const title = 'Page Not Found | Admoran';
+const description = 'This page doesn’t exist. Head back to the homepage or browse services.';
+---
+
+<Layout title={title} description={description} robots="noindex, follow">
+  <CTASection>
+    <div class="mx-auto max-w-section px-6 py-24 text-center md:py-32">
+      <p class="font-mono text-sm font-medium uppercase tracking-wide text-ink">404</p>
+      <h1 class="mt-3 font-heading text-[clamp(2rem,4vw,3rem)] font-semibold tracking-tight text-ink">
+        That page went missing.
+      </h1>
+      <p class="mx-auto mt-4 max-w-prose text-[1.0625rem] text-muted">
+        Not every URL survives a redesign. Try the homepage, browse services, or send a WhatsApp if
+        you were looking for something specific.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-6">
+        <a href="/" class="font-semibold text-ink underline decoration-muted/40 underline-offset-4 hover:decoration-accent">
+          Back to homepage
+        </a>
+        <a href="/seo-services/" class="font-semibold text-ink underline decoration-muted/40 underline-offset-4 hover:decoration-accent">
+          Browse services
+        </a>
+        <CTAButton>Talk on WhatsApp</CTAButton>
+      </div>
+    </div>
+  </CTASection>
+</Layout>
